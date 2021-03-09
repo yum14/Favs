@@ -1,0 +1,30 @@
+PODS:
+  - Kanna (5.2.4)
+  - Parchment (3.0.1)
+  - Realm (10.5.1):
+    - Realm/Headers (= 10.5.1)
+  - Realm/Headers (10.5.1)
+  - RealmSwift (10.5.1):
+    - Realm (= 10.5.1)
+
+DEPENDENCIES:
+  - Kanna
+  - Parchment
+  - RealmSwift
+
+SPEC REPOS:
+  trunk:
+    - Kanna
+    - Parchment
+    - Realm
+    - RealmSwift
+
+SPEC CHECKSUMS:
+  Kanna: b9d00d7c11428308c7f95e1f1f84b8205f567a8f
+  Parchment: 466a1cfb6151780db8acb4bbedc2d9c6bfa1e2ff
+  Realm: 77fcb4e0b9f2963ea06f584749a0d7dc9cab95e1
+  RealmSwift: 6abe6aa6cd8b70cc1a87afcb9232cabea74ff1ac
+
+PODFILE CHECKSUM: fe30a5760c372829909d9e2cef0ae435526ef08c
+
+COCOAPODS: 1.10.0

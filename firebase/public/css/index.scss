@@ -1,0 +1,189 @@
+$font-text: "Roboto", "Noto Sans JP", sans-serif;
+$main-color: #56b89e;
+$main-area-width: 54%;
+
+// TODO: font-familyを整える。windowsでもいい感じに・・ということでCDN必要かも。
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  background-color: #fbfbfb;
+  font-size: 1.7rem;
+  letter-spacing: 0.1rem;
+  line-height: 3rem;
+  color: #555;
+  font-family: $font-text;
+}
+
+h1 {
+  padding: 3rem 0 1.5rem;
+}
+
+h2 {
+  padding: 0.5rem 0;
+  border-bottom: solid 3px #555;
+}
+
+h3 {
+  font-size: 2.4rem;
+}
+
+.head {
+  background-color: $main-color;
+
+  .title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 16px 0;
+
+    .logo {
+      margin-top: 16px;
+      width: 160px;
+    }
+
+    .subtitle {
+      color: #fff;
+      font-size: 1.6rem;
+      margin: 0;
+      margin-top: 8px;
+      padding: 0;
+    }
+  }
+}
+
+.content {
+  display: block;
+  margin: 0 auto 56px;
+  width: $main-area-width;
+}
+
+.screen-and-description {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 64px;
+
+  &:nth-child(odd) {
+    flex-direction: row-reverse;
+  }
+
+  .demo {
+    padding: 0 6%;
+
+    img {
+      width: 140px;
+    }
+  }
+
+  .description {
+    width: 64%;
+  }
+}
+
+.divider {
+  margin: 0 auto;
+  height: 1px;
+  width: 68%;
+  background-color: #999;
+}
+
+.content-footer {
+  margin: 40px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 72%;
+
+  .download-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 24px;
+
+    .ios-badge {
+      width: 160px;
+    }
+  }
+
+  .page-link {
+    display: flex;
+  }
+
+  .button {
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    color: #fff;
+    background-color: $main-color;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    padding: 1rem 4rem;
+    font-weight: bold;
+    margin: 8px 12px;
+  }
+}
+
+.footer {
+  margin-top: 72px;
+  background-color: $main-color;
+
+  .copyright {
+    display: block;
+    color: #fff;
+    font-size: 1.2rem;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .content {
+    width: 90%;
+  }
+
+  .screen-and-description {
+    flex-direction: column;
+    margin-top: 24px;
+
+    &:nth-child(odd) {
+      flex-direction: column;
+    }
+
+    .demo {
+      padding: 0 2%;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    .description {
+      width: 98%;
+    }
+  }
+
+  .divider {
+    width: 84%;
+  }
+
+  .content-footer {
+    width: 100%;
+    margin: 40px auto;
+    flex-direction: column;
+
+    .page-link {
+      flex-direction: column;
+      margin-top: 24px;
+    }
+  }
+}
