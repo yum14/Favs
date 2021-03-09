@@ -1,0 +1,219 @@
+*,
+*::before,
+*::after {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  background-color: #fbfbfb;
+  font-size: 1.7rem;
+  letter-spacing: 0.1rem;
+  line-height: 3rem;
+  color: #555;
+  font-family: "Roboto", "Noto Sans JP", sans-serif;
+}
+
+h1 {
+  padding: 3rem 0 1.5rem;
+}
+
+h2 {
+  padding: 0.5rem 0;
+  border-bottom: solid 3px #555;
+}
+
+h3 {
+  font-size: 2.4rem;
+}
+
+.head {
+  background-color: #56b89e;
+}
+
+.head .title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  padding: 16px 0;
+}
+
+.head .title .logo {
+  margin-top: 16px;
+  width: 160px;
+}
+
+.head .title .subtitle {
+  color: #fff;
+  font-size: 1.6rem;
+  margin: 0;
+  margin-top: 8px;
+  padding: 0;
+}
+
+.content {
+  display: block;
+  margin: 0 auto 56px;
+  width: 54%;
+}
+
+.screen-and-description {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-top: 64px;
+}
+
+.screen-and-description:nth-child(odd) {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: row-reverse;
+          flex-direction: row-reverse;
+}
+
+.screen-and-description .demo {
+  padding: 0 6%;
+}
+
+.screen-and-description .demo img {
+  width: 140px;
+}
+
+.screen-and-description .description {
+  width: 64%;
+}
+
+.divider {
+  margin: 0 auto;
+  height: 1px;
+  width: 68%;
+  background-color: #999;
+}
+
+.content-footer {
+  margin: 40px auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 72%;
+}
+
+.content-footer .download-link {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0 24px;
+}
+
+.content-footer .download-link .ios-badge {
+  width: 160px;
+}
+
+.content-footer .page-link {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.content-footer .button {
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  letter-spacing: 0.1em;
+  color: #fff;
+  background-color: #56b89e;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  padding: 1rem 4rem;
+  font-weight: bold;
+  margin: 8px 12px;
+}
+
+.footer {
+  margin-top: 72px;
+  background-color: #56b89e;
+}
+
+.footer .copyright {
+  display: block;
+  color: #fff;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+@media screen and (max-width: 480px) {
+  .content {
+    width: 90%;
+  }
+  .screen-and-description {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    margin-top: 24px;
+  }
+  .screen-and-description:nth-child(odd) {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .screen-and-description .demo {
+    padding: 0 2%;
+  }
+  .screen-and-description .demo img {
+    width: 100%;
+  }
+  .screen-and-description .description {
+    width: 98%;
+  }
+  .divider {
+    width: 84%;
+  }
+  .content-footer {
+    width: 100%;
+    margin: 40px auto;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .content-footer .page-link {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    margin-top: 24px;
+  }
+}
+/*# sourceMappingURL=index.css.map */
