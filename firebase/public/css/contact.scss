@@ -1,0 +1,104 @@
+$font-text: "Roboto", "Noto Sans JP", sans-serif;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  background-color: #f0f0f0;
+  font-size: 1.7rem;
+  letter-spacing: 0.1rem;
+  line-height: 3rem;
+  color: #555;
+}
+
+h1 {
+  padding: 3rem 0 1.5rem;
+}
+
+h2 {
+  padding: 0.5rem 0;
+  border-bottom: solid 3px #555;
+}
+
+.content {
+  background-color: #fff;
+  display: block;
+  margin: 0 auto;
+  width: 60%;
+  padding: 0px 32px;
+  padding-bottom: 24px;
+}
+
+section {
+  margin-bottom: 64px;
+}
+
+input,
+textarea {
+  display: block;
+  width: 100%;
+  line-height: 45px;
+  background-color: #eff1f5;
+  color: #5c6b80;
+  border: none;
+  border-radius: 3px;
+  padding: 0 12px;
+}
+
+textarea {
+  line-height: 24px;
+  padding: 8px 12px;
+}
+
+.form-item:not(:first-child) {
+  margin-top: 16px;
+}
+
+.submit {
+  background-color: #bdbdbd;
+  color: #fff;
+  font-weight: bold;
+  width: 100%;
+  border: none;
+  border-radius: 4px;
+  height: 48px;
+  margin-top: 24px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.validation-error {
+  color: red;
+}
+
+.hidden {
+  display: none;
+}
+
+.success-status {
+  color: green;
+}
+
+.error-status {
+  color: red;
+}
+
+.sendmail-status {
+  padding: 0 8px;
+  font-weight: bold;
+}
+
+@media screen and (max-width: 480px) {
+  .content {
+    width: 90%;
+  }
+}

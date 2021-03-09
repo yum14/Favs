@@ -1,0 +1,47 @@
+$font-text: "Roboto", "Noto Sans JP", sans-serif;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  background-color: #f0f0f0;
+  font-size: 1.7rem;
+  letter-spacing: 0.1rem;
+  line-height: 3rem;
+  color: #555;
+}
+
+h1 {
+  padding: 3rem 0;
+}
+
+h2 {
+  padding: 0.5rem 0;
+  border-bottom: solid 3px #555;
+}
+
+.content {
+  background-color: #fff;
+  display: block;
+  margin: 0 auto;
+  width: 60%;
+  padding: 0px 32px;
+  padding-bottom: 24px;
+}
+
+section {
+  margin-bottom: 64px;
+}
+
+@media screen and (max-width: 480px) {
+  .content {
+    width: 90%;
+  }
+}
