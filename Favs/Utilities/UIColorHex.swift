@@ -2,7 +2,7 @@
 //  UIColorHex.swift
 //  Favs
 //
-//  Created by ゆう on 2020/12/20.
+//  Created by yum on 2020/12/20.
 //
 
 import UIKit

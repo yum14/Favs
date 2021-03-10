@@ -2,7 +2,7 @@
 //  WebPage.swift
 //  Favs
 //
-//  Created by ゆう on 2020/11/04.
+//  Created by yum on 2020/11/04.
 //
 
 import Foundation

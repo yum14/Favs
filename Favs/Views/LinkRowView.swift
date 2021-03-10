@@ -2,7 +2,7 @@
 //  LinkRowView.swift
 //  Favs
 //
-//  Created by ゆう on 2020/12/26.
+//  Created by yum on 2020/12/26.
 //
 
 import SwiftUI

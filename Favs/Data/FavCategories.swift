@@ -2,7 +2,7 @@
 //  Categories.swift
 //  Favs
 //
-//  Created by ゆう on 2020/10/31.
+//  Created by yum on 2020/10/31.
 //
 
 import Foundation
