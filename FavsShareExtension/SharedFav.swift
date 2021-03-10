@@ -2,7 +2,7 @@
 //  Fav.swift
 //  FavsShareExtension
 //
-//  Created by ゆう on 2020/12/14.
+//  Created by yum on 2020/12/14.
 //
 
 import Foundation

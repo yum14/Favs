@@ -2,7 +2,7 @@
 //  RemoteImageModel.swift
 //  Favs
 //
-//  Created by ゆう on 2020/10/21.
+//  Created by yum on 2020/10/21.
 //
 
 import Foundation

@@ -2,7 +2,7 @@
 //  ShareViewController.swift
 //  FavsShareExtension
 //
-//  Created by ゆう on 2020/12/14.
+//  Created by yum on 2020/12/14.
 //
 
 import UIKit
@@ -34,19 +34,33 @@ class ShareViewController: SLComposeServiceViewController {
             itemProvider.loadItem(forTypeIdentifier: puclicURL, options: nil, completionHandler: { (item, error) in
                 // NSURLを取得する
                 if let url: URL = item as? URL {
-                    // 保存処理
-                    
-                    let fav = SharedFav(url: url, title: self.contentText)
+                    if let userDefaults = UserDefaults(suiteName: self.suiteName) {
+                        
+                        // すでに保存済みのデータを取得する
+                        var data = {() -> [SharedFav] in
+                            guard let sharedData = userDefaults.data(forKey: self.key) else {
+                                return []
+                            }
+                            
+                            let jsonDecoder = JSONDecoder()
+                            jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
+                            guard let favs = try? jsonDecoder.decode([SharedFav].self, from: sharedData) else {
+                                return []
+                            }
+                            return favs
+                        }()
+                        
+                        // 入力された情報を追加し保存する
+                        data.append(SharedFav(url: url, title: self.contentText))
 
-                    let jsonEncoder = JSONEncoder()
-                    jsonEncoder.keyEncodingStrategy = .convertToSnakeCase
-                    guard let data = try? jsonEncoder.encode(fav) else {
-                        return
+                        let jsonEncoder = JSONEncoder()
+                        jsonEncoder.keyEncodingStrategy = .convertToSnakeCase
+                        guard let encodeData = try? jsonEncoder.encode(data) else {
+                            return
+                        }
+
+                        userDefaults.set(encodeData, forKey: self.key)
                     }
-
-                    let sharedDefaults: UserDefaults = UserDefaults(suiteName: self.suiteName)!
-                    sharedDefaults.set(data, forKey: self.key)
-                    
                 }
                 self.extensionContext!.completeRequest(returningItems: [], completionHandler: nil)
             })

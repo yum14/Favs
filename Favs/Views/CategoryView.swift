@@ -2,7 +2,7 @@
 //  CategoryView.swift
 //  Favs
 //
-//  Created by ゆう on 2020/12/28.
+//  Created by yum on 2020/12/28.
 //
 
 import SwiftUI

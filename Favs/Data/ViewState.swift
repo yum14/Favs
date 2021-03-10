@@ -2,7 +2,7 @@
 //  ViewState.swift
 //  Favs
 //
-//  Created by ゆう on 2021/01/17.
+//  Created by yum on 2021/01/17.
 //
 
 import Foundation

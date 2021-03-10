@@ -2,7 +2,7 @@
 //  ShareSheet.swift
 //  Favs
 //
-//  Created by ゆう on 2020/10/18.
+//  Created by yum on 2020/10/18.
 //
 
 import SwiftUI

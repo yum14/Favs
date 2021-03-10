@@ -2,13 +2,14 @@
 //  ContentView.swift
 //  Favs
 //
-//  Created by ゆう on 2020/10/15.
+//  Created by yum on 2020/10/15.
 //
 
 import SwiftUI
 
 struct ContentView: View {
     private let viewStateStore = ViewStateStore.shared
+    private let sharedFavObserver = SharedFavObserver()
     
     init() {
         UINavigationBar.appearance().barTintColor = UIColor(Color("NavigationBar"))

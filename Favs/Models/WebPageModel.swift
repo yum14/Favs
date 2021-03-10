@@ -2,7 +2,7 @@
 //  WebPageHttpClient.swift
 //  Favs
 //
-//  Created by ゆう on 2020/11/04.
+//  Created by yum on 2020/11/04.
 //
 
 import Foundation
@@ -18,12 +18,11 @@ class WebPageModel: ObservableObject {
     }
     
     func getPage(url: URL, completion: @escaping (PageInfo) -> Void = {_ in return}) -> Void {
-//    func getPage(url: URL) -> Void {
         let request = URLRequest(url: url)
         self.isLoading = true
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             guard let data = data else {
-                // TODO: httpは通らない。info.plistのNSAllowsArbitraryLoadsをyesとすれば通せるようだがどうするか。
+                // httpは通らない。info.plistのNSAllowsArbitraryLoadsをyesとすれば通せるようだがどうするか。
                 if let error = error {
                     print(error.localizedDescription)
                 }

@@ -2,7 +2,7 @@
 //  CategoryStore.swift
 //  Favs
 //
-//  Created by ゆう on 2020/10/31.
+//  Created by yum on 2020/10/31.
 //
 
 import Foundation
@@ -37,6 +37,9 @@ final class CategoryStore: ObservableObject {
                 print(error.localizedDescription)
             }
         })
+        
+        // 初期データの追加
+        addInitial()
     }
     
     public init(categories: [FavCategory]) {
@@ -51,6 +54,12 @@ final class CategoryStore: ObservableObject {
     
     deinit {
         notificationTokens.forEach { $0.invalidate() }
+    }
+    
+    private func addInitial() {
+        if self.categoryList.first(where: { $0.isInitial }) == nil {
+            add(name: "すべて", displayName: "すべて", isInitial: true)
+        }
     }
     
     func add(id: String = "", name: String, displayName: String = "", isInitial: Bool = false) {

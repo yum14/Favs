@@ -2,7 +2,7 @@
 //  FavStore.swift
 //  Favs
 //
-//  Created by ゆう on 2020/11/01.
+//  Created by yum on 2020/11/01.
 //
 
 import Foundation

@@ -2,7 +2,7 @@
 //  FavDetail.swift
 //  Favs
 //
-//  Created by ゆう on 2020/11/17.
+//  Created by yum on 2020/11/17.
 //
 
 import SwiftUI
