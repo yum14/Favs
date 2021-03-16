@@ -12,7 +12,7 @@ class SharedFavObserver: NSObject {
     private let key: String = "shareData"
     private let favStore = FavStore.shared
     private let categoryStore = CategoryStore.shared
-    private let webPageModel = WebPageModel()
+    private let pageInfoObserver = PageInfoObserver(selector: WebAccessSelector())
     
     override init() {
         super.init()
@@ -35,33 +35,33 @@ class SharedFavObserver: NSObject {
             }
             
             for item in sharedFavs {
-                let completion = { (pageInfo: PageInfo) in
-                    if !(pageInfo.url.count > 0) {
+                let completion = { (pageInfo: PageInfo?, error: Error?) in
+                    guard let pageInfo = pageInfo else {
                         return
                     }
-                
+                    
                     self.favStore.add(url: item.url.absoluteString,
                                       category: self.categoryStore.categoryList.first(where: {$0.isInitial})!.id,
                                       comment: "",
-                                      dispTitle: self.webPageModel.pageInfo.dispTitle,
-                                      dispDescription: self.webPageModel.pageInfo.dispDescription,
-                                      imageUrl: self.webPageModel.pageInfo.imageUrl,
-                                      titleOnHeader: self.webPageModel.pageInfo.titleOnHeader,
-                                      ogTitle: self.webPageModel.pageInfo.ogTitle,
-                                      ogDescription: self.webPageModel.pageInfo.ogDescription,
-                                      ogType: self.webPageModel.pageInfo.ogType,
-                                      ogUrl: self.webPageModel.pageInfo.ogUrl,
-                                      ogImage: self.webPageModel.pageInfo.ogImage,
-                                      fbAppId: self.webPageModel.pageInfo.fbAppId,
-                                      twitterCard: self.webPageModel.pageInfo.twitterCard,
-                                      twitterSite: self.webPageModel.pageInfo.twitterSite,
-                                      twitterCreator: self.webPageModel.pageInfo.twitterCreator,
-                                      descriptionOnHeader: self.webPageModel.pageInfo.descriptionOnHeader,
-                                      thumbnail: self.webPageModel.pageInfo.thumbnail)
+                                      dispTitle: pageInfo.dispTitle,
+                                      dispDescription: pageInfo.dispDescription,
+                                      imageUrl: pageInfo.imageUrl,
+                                      titleOnHeader: pageInfo.titleOnHeader,
+                                      ogTitle: pageInfo.ogTitle,
+                                      ogDescription: pageInfo.ogDescription,
+                                      ogType: pageInfo.ogType,
+                                      ogUrl: pageInfo.ogUrl,
+                                      ogImage: pageInfo.ogImage,
+                                      fbAppId: pageInfo.fbAppId,
+                                      twitterCard: pageInfo.twitterCard,
+                                      twitterSite: pageInfo.twitterSite,
+                                      twitterCreator: pageInfo.twitterCreator,
+                                      descriptionOnHeader: pageInfo.descriptionOnHeader,
+                                      thumbnail: pageInfo.thumbnail)
                 }
                 
                 // webページ情報の取得
-                webPageModel.getPage(url: item.url, completion: completion)
+                self.pageInfoObserver.get(url: item.url, completion: completion)
             }
             
             // 読み込んだら現在の値を消す

@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import SwiftUIX
 
 struct CategoryView: View {
     @Environment(\.editMode) var editMode
@@ -21,12 +20,10 @@ struct CategoryView: View {
     @State var firstAppear = true
     @State var displayMode: HomeView.DisplayMode = .list
     @State var isDeleteAlertPresented = false
-    
     let initialViewState: ViewState?
-    
+
     var body: some View {
         VStack {
-            
             NavigationLink(destination:
                             Group {
                                 if editMode?.wrappedValue.isEditing ?? false {
@@ -48,7 +45,7 @@ struct CategoryView: View {
                         Spacer()
                     }
                     .padding()
-                    .background(Color.systemBackground)
+                    .background(Color(UIColor.systemBackground))
                     .onTapGesture {
                         self.selectedCategory = category
                         self.isNavigationActive = true
@@ -83,17 +80,18 @@ struct CategoryView: View {
                 }
                 
                 if self.isNewRowActive {
-                    CocoaTextField("新しいカテゴリ", text: $newCategoryText, onCommit: {
-
-                        if self.isNewRowActive && !self.newCategoryText.isEmpty {
-                            self.categoryStore.add(name: self.newCategoryText)
-                        }
-                        self.isNewRowActive.toggle()
-                        self.editButtonDisabled = false
-                    })
-                    .isFirstResponder(self.isFirstResponder)
-                    .autocapitalization(.none)
-                    .padding()
+                    CustomTextField("新しいカテゴリ",
+                                    text: $newCategoryText,
+                                    isFirstResponder: self.isFirstResponder,
+                                    onCommit: {
+                                        if self.isNewRowActive && !self.newCategoryText.isEmpty {
+                                            self.categoryStore.add(name: self.newCategoryText)
+                                        }
+                                        self.isNewRowActive.toggle()
+                                        self.editButtonDisabled = false
+                                    })
+                        .autocapitalization(.none)
+                        .padding()
                 }
 
 
@@ -143,33 +141,30 @@ struct CategoryView: View {
             self.firstAppear.toggle()
         }
         .navigationViewStyle(StackNavigationViewStyle())
-        .navigationBarItems(center: Text("カテゴリ")
-                                .foregroundColor(Color("NavigationBarItem")),
-                            trailing:
-                                HStack {
-                                    if editMode?.wrappedValue.isEditing ?? false {
-                                        Button(action: {
-                                            withAnimation {
-                                                self.editMode?.wrappedValue = .inactive
+        .navigationBarItems(trailing:
+                                        HStack {
+                                            if editMode?.wrappedValue.isEditing ?? false {
+                                                Button(action: {
+                                                    withAnimation {
+                                                        self.editMode?.wrappedValue = .inactive
+                                                    }
+                                                }) {
+                                                    Image(systemName: "checkmark.circle")
+                                                        .foregroundColor(Color("NavigationBarItem"))
+                                                }
+                                            } else {
+                                                Button(action: {
+                                                    withAnimation {
+                                                        self.editMode?.wrappedValue = .active
+                                                    }
+                                                }) {
+                                                    Image(systemName: "square.and.pencil")
+                                                        .foregroundColor(!self.editButtonDisabled ? Color("NavigationBarItem") : Color.secondary)
+                                                }
+                                                .disabled(self.editButtonDisabled)
                                             }
-                                        }) {
-                                            Image(systemName: "checkmark.circle")
-                                                .foregroundColor(Color("NavigationBarItem"))
-                                        }
-                                    } else {
-                                        Button(action: {
-                                            withAnimation {
-                                                self.editMode?.wrappedValue = .active
-                                            }
-                                        }) {
-                                            Image(systemName: "square.and.pencil")
-                                                .foregroundColor(!self.editButtonDisabled ? Color("NavigationBarItem") : Color.secondary)
-                                        }
-                                        .disabled(self.editButtonDisabled)
-                                    }
-                                },
-                            displayMode: .inline
-        )
+                                        })
+        .navigationBarTitle(Text("カテゴリ"), displayMode: .inline)
     }
 }
 

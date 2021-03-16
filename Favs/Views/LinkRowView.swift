@@ -20,6 +20,7 @@ struct LinkRowView: View {
                 .scaledToFill()
                 .frame(width: rowHeight * 16/9, height: rowHeight, alignment: .center)
                 .clipped()
+                .cornerRadius(2)
             
             VStack(spacing: 0) {
                 HStack(spacing: 0) {

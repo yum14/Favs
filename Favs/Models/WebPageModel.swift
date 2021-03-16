@@ -8,18 +8,10 @@
 import Foundation
 import Kanna
 
-class WebPageModel: ObservableObject {
-    @Published var pageInfo: PageInfo
-    @Published var isLoading: Bool
+class WebPageModel: ObservableObject, WebAccessible {
     
-    init() {
-        self.pageInfo = PageInfo()
-        self.isLoading = false
-    }
-    
-    func getPage(url: URL, completion: @escaping (PageInfo) -> Void = {_ in return}) -> Void {
+    func get(url: URL, completion: @escaping (PageInfo?, Error?) -> Void) throws -> Void {
         let request = URLRequest(url: url)
-        self.isLoading = true
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             guard let data = data else {
                 // httpは通らない。info.plistのNSAllowsArbitraryLoadsをyesとすれば通せるようだがどうするか。
@@ -31,26 +23,22 @@ class WebPageModel: ObservableObject {
             
             do {
                 try DispatchQueue.main.sync {
-                    let doc = try HTML(html: String(data: data, encoding: .utf8)!, encoding: .utf8)
+                    let htmlString = String(data: data, encoding: .utf8) ?? String(data: data, encoding: .shiftJIS) ?? nil
+                    let doc = try HTML(html: htmlString!, encoding: .utf8)
                     var pageInfo = self.htmlParse(url: url, doc: doc)
                     pageInfo.dispTitle = !pageInfo.ogTitle.isEmpty ? pageInfo.ogTitle : pageInfo.titleOnHeader
                     pageInfo.dispDescription = !pageInfo.ogDescription.isEmpty ? pageInfo.ogDescription : pageInfo.descriptionOnHeader
                     pageInfo.imageUrl = !pageInfo.ogImage.isEmpty ? pageInfo.ogImage : pageInfo.thumbnail
-                    self.pageInfo = pageInfo
-                    self.isLoading = false
-                    completion(pageInfo)
+                    completion(pageInfo, nil)
                 }
             } catch let error {
-                print(error)
-                self.pageInfo = PageInfo()
-                self.isLoading = false
-                completion(PageInfo())
+                completion(nil, error)
             }
         }
         task.resume()
     }
     
-    func htmlParse(url: URL, doc: HTMLDocument) -> PageInfo {
+    private func htmlParse(url: URL, doc: HTMLDocument) -> PageInfo {
         var pageInfo = PageInfo(url: url.absoluteString)
         
         if let title = doc.title {

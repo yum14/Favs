@@ -19,52 +19,76 @@ class ShareViewController: SLComposeServiceViewController {
         if !(self.contentText.count > 0) {
             return false
         }
-
+        
         return true
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        
     }
     
     override func didSelectPost() {
         let extensionItem: NSExtensionItem = self.extensionContext?.inputItems.first as! NSExtensionItem
-        let itemProvider = extensionItem.attachments?.first as! NSItemProvider
-        
-        let puclicURL = String(kUTTypeURL)  // "public.url"
-        
-        // shareExtension で NSURL を取得
-        if itemProvider.hasItemConformingToTypeIdentifier(puclicURL) {
-            itemProvider.loadItem(forTypeIdentifier: puclicURL, options: nil, completionHandler: { (item, error) in
-                // NSURLを取得する
-                if let url: URL = item as? URL {
-                    if let userDefaults = UserDefaults(suiteName: self.suiteName) {
-                        
-                        // すでに保存済みのデータを取得する
-                        var data = {() -> [SharedFav] in
-                            guard let sharedData = userDefaults.data(forKey: self.key) else {
-                                return []
-                            }
-                            
-                            let jsonDecoder = JSONDecoder()
-                            jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
-                            guard let favs = try? jsonDecoder.decode([SharedFav].self, from: sharedData) else {
-                                return []
-                            }
-                            return favs
-                        }()
-                        
-                        // 入力された情報を追加し保存する
-                        data.append(SharedFav(url: url, title: self.contentText))
-
-                        let jsonEncoder = JSONEncoder()
-                        jsonEncoder.keyEncodingStrategy = .convertToSnakeCase
-                        guard let encodeData = try? jsonEncoder.encode(data) else {
-                            return
-                        }
-
-                        userDefaults.set(encodeData, forKey: self.key)
-                    }
-                }
-                self.extensionContext!.completeRequest(returningItems: [], completionHandler: nil)
-            })
+        guard let itemProvider = extensionItem.attachments?.first else {
+            return
         }
+        
+        if itemProvider.hasItemConformingToTypeIdentifier(String(kUTTypeURL)) {
+            self.handleUrl(itemProvider: itemProvider)
+        } else if itemProvider.hasItemConformingToTypeIdentifier(String(kUTTypePlainText)) {
+            // youtubeはplainTextの模様
+            self.handlePlainText(itemProvider: itemProvider)
+        }
+        
+    }
+    
+    private func handlePlainText(itemProvider: NSItemProvider) {
+        itemProvider.loadItem(forTypeIdentifier: String(kUTTypePlainText), options: nil, completionHandler: { (item, error) in
+            if let urlString = item as? String, let url = URL(string: urlString) {
+                self.addUserDefaults(newFav: SharedFav(url: url, title: self.contentText))
+            }
+            self.extensionContext!.completeRequest(returningItems: [], completionHandler: nil)
+        })
+    }
+
+    private func handleUrl(itemProvider: NSItemProvider) {
+        itemProvider.loadItem(forTypeIdentifier: String(kUTTypeURL), options: nil, completionHandler: { (item, error) in
+            if let url: URL = item as? URL {
+                self.addUserDefaults(newFav: SharedFav(url: url, title: self.contentText))
+            }
+            self.extensionContext!.completeRequest(returningItems: [], completionHandler: nil)
+        })
+    }
+    
+    private func addUserDefaults(newFav: SharedFav) {
+        if let userDefaults = UserDefaults(suiteName: self.suiteName) {
+            
+            var data = self.getSavedFavs(userDefaults: userDefaults)
+            data.append(newFav)
+            
+            let jsonEncoder = JSONEncoder()
+            jsonEncoder.keyEncodingStrategy = .convertToSnakeCase
+            guard let encodeData = try? jsonEncoder.encode(data) else {
+                return
+            }
+            
+            userDefaults.set(encodeData, forKey: self.key)
+        }
+    }
+    
+    private func getSavedFavs(userDefaults: UserDefaults) -> [SharedFav] {
+        guard let sharedData = userDefaults.data(forKey: self.key) else {
+            return []
+        }
+        
+        let jsonDecoder = JSONDecoder()
+        jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
+        guard let favs = try? jsonDecoder.decode([SharedFav].self, from: sharedData) else {
+            return []
+        }
+        return favs
     }
     
     override func configurationItems() -> [Any]! {
