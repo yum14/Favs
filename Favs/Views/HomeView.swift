@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftUIX
 import Parchment
 import RealmSwift
 
@@ -125,6 +126,7 @@ struct HomeView: View {
             }) {
                 Image(systemName: "chevron.backward")
                     .foregroundColor(Color("NavigationBarItem"))
+                    .font(.body, weight: .bold)
             }
             .padding(.trailing),
             center: Button(action: {
@@ -134,6 +136,7 @@ struct HomeView: View {
             }) {
                 Text(self.getNavigationBarTitle(categories: self.categoryStore.categoryList, categoryId: self.categoryId))
                     .foregroundColor(Color("NavigationBarItem"))
+                    .font(.body, weight: .bold)
             },
             trailing:
                 HStack {
@@ -145,6 +148,7 @@ struct HomeView: View {
                         }) {
                             Image(systemName: "checkmark.circle")
                                 .foregroundColor(Color("NavigationBarItem"))
+                                .font(.body, weight: .bold)
                         }
                     } else {
                         
@@ -154,6 +158,7 @@ struct HomeView: View {
                         }) {
                             Image(systemName: "plus")
                                 .foregroundColor(Color("NavigationBarItem"))
+                                .font(.body, weight: .bold)
                         }
                         
                         if self.displayMode == .list && self.favStore.favs.count > 0 {
@@ -164,6 +169,7 @@ struct HomeView: View {
                             }) {
                                 Image(systemName: "square.and.pencil")
                                     .foregroundColor(Color("NavigationBarItem"))
+                                    .font(.body, weight: .bold)
                             }
                         }
                     }

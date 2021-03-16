@@ -16,7 +16,7 @@ struct NewFavView: View {
     @State var titleDisabled = true
     @State var firstAppear = true
     @Environment(\.presentationMode) var presentationMode
-    @ObservedObject var webPageModel = WebPageModel()
+    @ObservedObject var pageInfoObserver = PageInfoObserver(selector: WebAccessSelector())
     @ObservedObject var favStore = FavStore.shared
     @ObservedObject var categoryStore = CategoryStore.shared
     @State var isLoading = false
@@ -33,21 +33,19 @@ struct NewFavView: View {
                         HStack {
                             TextField("URLを入力してください", text: $newUrl, onCommit:  {
                                 if let url = URL(string: newUrl) {
-                                    self.webPageModel.getPage(url: url)
-                                } else {
-
+                                    self.pageInfoObserver.get(url: url)
                                 }
                             })
                             .autocapitalization(.none)
-                            .disabled(!self.webPageModel.pageInfo.dispTitle.isEmpty)
-                            .foregroundColor(!self.webPageModel.pageInfo.dispTitle.isEmpty ? Color.secondary : Color.primary)
+                            .disabled(!self.pageInfoObserver.pageInfo.dispTitle.isEmpty)
+                            .foregroundColor(!self.pageInfoObserver.pageInfo.dispTitle.isEmpty ? Color.secondary : Color.primary)
                         }                    }
-                    if !self.webPageModel.pageInfo.dispTitle.isEmpty {
+                    if !self.pageInfoObserver.pageInfo.dispTitle.isEmpty {
                         Section {
                             HStack {
-                                TextField("タイトルを入力してください", text: $webPageModel.pageInfo.dispTitle)
+                                TextField("タイトルを入力してください", text: $pageInfoObserver.pageInfo.dispTitle)
                                     .autocapitalization(.none)
-                                    .disabled(self.webPageModel.pageInfo.dispTitle.isEmpty)
+                                    .disabled(self.pageInfoObserver.pageInfo.dispTitle.isEmpty)
                             }
                             Picker(selection: $categorySelection, label: Text("カテゴリ")) {
                                 ForEach(0 ..< categoryItems.count) {
@@ -61,8 +59,8 @@ struct NewFavView: View {
                 
                 
                 // インジケータ
-                if self.webPageModel.isLoading {
-                    LoadingIndicatorView(isLoading: self.webPageModel.isLoading)
+                if self.pageInfoObserver.isLoading {
+                    LoadingIndicatorView(isLoading: self.pageInfoObserver.isLoading)
                 }
                 
             }
@@ -89,27 +87,27 @@ struct NewFavView: View {
                 self.favStore.add(url: self.newUrl,
                                   category: categoryItems[self.categorySelection].id,
                                   comment: "",
-                                  dispTitle: self.webPageModel.pageInfo.dispTitle,
-                                  dispDescription: self.webPageModel.pageInfo.dispDescription,
-                                  imageUrl: self.webPageModel.pageInfo.imageUrl,
-                                  titleOnHeader: self.webPageModel.pageInfo.titleOnHeader,
-                                  ogTitle: self.webPageModel.pageInfo.ogTitle,
-                                  ogDescription: self.webPageModel.pageInfo.ogDescription,
-                                  ogType: self.webPageModel.pageInfo.ogType,
-                                  ogUrl: self.webPageModel.pageInfo.ogUrl,
-                                  ogImage: self.webPageModel.pageInfo.ogImage,
-                                  fbAppId: self.webPageModel.pageInfo.fbAppId,
-                                  twitterCard: self.webPageModel.pageInfo.twitterCard,
-                                  twitterSite: self.webPageModel.pageInfo.twitterSite,
-                                  twitterCreator: self.webPageModel.pageInfo.twitterCreator,
-                                  descriptionOnHeader: self.webPageModel.pageInfo.descriptionOnHeader,
-                                  thumbnail: self.webPageModel.pageInfo.thumbnail)
+                                  dispTitle: self.pageInfoObserver.pageInfo.dispTitle,
+                                  dispDescription: self.pageInfoObserver.pageInfo.dispDescription,
+                                  imageUrl: self.pageInfoObserver.pageInfo.imageUrl,
+                                  titleOnHeader: self.pageInfoObserver.pageInfo.titleOnHeader,
+                                  ogTitle: self.pageInfoObserver.pageInfo.ogTitle,
+                                  ogDescription: self.pageInfoObserver.pageInfo.ogDescription,
+                                  ogType: self.pageInfoObserver.pageInfo.ogType,
+                                  ogUrl: self.pageInfoObserver.pageInfo.ogUrl,
+                                  ogImage: self.pageInfoObserver.pageInfo.ogImage,
+                                  fbAppId: self.pageInfoObserver.pageInfo.fbAppId,
+                                  twitterCard: self.pageInfoObserver.pageInfo.twitterCard,
+                                  twitterSite: self.pageInfoObserver.pageInfo.twitterSite,
+                                  twitterCreator: self.pageInfoObserver.pageInfo.twitterCreator,
+                                  descriptionOnHeader: self.pageInfoObserver.pageInfo.descriptionOnHeader,
+                                  thumbnail: self.pageInfoObserver.pageInfo.thumbnail)
                 
                 self.presentationMode.wrappedValue.dismiss()
             }) {
                 Text("作成")
             }
-            .disabled(self.webPageModel.pageInfo.dispTitle.isEmpty))
+            .disabled(self.pageInfoObserver.pageInfo.dispTitle.isEmpty))
         }
     }
     
@@ -132,9 +130,9 @@ struct NewFavView_Previews: PreviewProvider {
         ]
         let categoryStoreMock = CategoryStore(categories: categories)
         
-        let webPageModel = WebPageModel()
-        webPageModel.pageInfo = PageInfo(url: "https://apple.com", dispTitle: "Title1")
+        let pageInfoObserver = PageInfoObserver(selector: WebAccessSelector())
+        pageInfoObserver.pageInfo = PageInfo(url: "https://apple.com", dispTitle: "Title1")
         
-        return NewFavView(newUrl: webPageModel.pageInfo.url, newTitle: webPageModel.pageInfo.dispTitle, categorySelection: 0, webPageModel: webPageModel, favStore: favStoreMock, categoryStore: categoryStoreMock)
+        return NewFavView(newUrl: pageInfoObserver.pageInfo.url, newTitle: pageInfoObserver.pageInfo.dispTitle, categorySelection: 0, pageInfoObserver: pageInfoObserver, favStore: favStoreMock, categoryStore: categoryStoreMock)
     }
 }
