@@ -15,7 +15,7 @@ final class EnvironmentStore: EnvironmentAccesible {
     var config: EnvironmentItem?
     static let shared = EnvironmentStore()
     
-    private var fileName: String = ".env"
+    private var fileName: String = "env.json"
     private var type: EnvironmentType = EnvironmentType.production
     
     private init() {
