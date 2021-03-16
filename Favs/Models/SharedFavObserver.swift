@@ -43,7 +43,7 @@ class SharedFavObserver: NSObject {
                     self.favStore.add(url: item.url.absoluteString,
                                       category: self.categoryStore.categoryList.first(where: {$0.isInitial})!.id,
                                       comment: "",
-                                      dispTitle: pageInfo.dispTitle,
+                                      dispTitle: item.title,
                                       dispDescription: pageInfo.dispDescription,
                                       imageUrl: pageInfo.imageUrl,
                                       titleOnHeader: pageInfo.titleOnHeader,
