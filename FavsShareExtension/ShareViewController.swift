@@ -13,6 +13,7 @@ class ShareViewController: SLComposeServiceViewController {
     
     let suiteName: String = "group.com.inakase.Favs"
     let key: String = "shareData"
+    var initialContentText: String = ""
     
     // 文字入力されていないとPOSTを無効にする
     override func isContentValid() -> Bool {
@@ -26,7 +27,7 @@ class ShareViewController: SLComposeServiceViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        
+        self.initialContentText = self.contentText
     }
     
     override func didSelectPost() {
@@ -46,7 +47,7 @@ class ShareViewController: SLComposeServiceViewController {
     
     private func handlePlainText(itemProvider: NSItemProvider) {
         itemProvider.loadItem(forTypeIdentifier: String(kUTTypePlainText), options: nil, completionHandler: { (item, error) in
-            if let urlString = item as? String, let url = URL(string: urlString) {
+            if let url = URL(string: self.initialContentText) {
                 self.addUserDefaults(newFav: SharedFav(url: url, title: self.contentText))
             }
             self.extensionContext!.completeRequest(returningItems: [], completionHandler: nil)
