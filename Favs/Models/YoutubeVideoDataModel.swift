@@ -33,7 +33,7 @@ class YoutubeVideoDataModel: WebAccessible {
             return false
         }
         
-        guard let aaaa = queryItems.first(where: {$0.name == self.queryName}) else {
+        guard let _ = queryItems.first(where: {$0.name == self.queryName}) else {
             return false
         }
         
