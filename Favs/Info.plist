@@ -30,9 +30,9 @@
 	<key>UILaunchScreen</key>
 	<dict>
 		<key>UIColorName</key>
-		<string>launchScreenBackground</string>
+		<string>LaunchScreenBackground</string>
 		<key>UIImageName</key>
-		<string>launchScreenImage</string>
+		<string>LaunchScreenImage</string>
 	</dict>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>

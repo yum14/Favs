@@ -29,7 +29,8 @@ struct LinkRowView: View {
                         .foregroundColor(.primary)
                         .lineLimit(2)
                         .padding(.vertical, 4)
-                        .padding(.horizontal)
+                        .padding(.leading)
+                        .padding(.trailing, 4)
                     Spacer()
                 }
                 Spacer()

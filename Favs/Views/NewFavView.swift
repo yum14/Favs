@@ -15,11 +15,14 @@ struct NewFavView: View {
     @State var createButtonDisabled = true
     @State var titleDisabled = true
     @State var firstAppear = true
+    @State var titleFirstAppear = true
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var pageInfoObserver = PageInfoObserver(selector: WebAccessSelector())
     @ObservedObject var favStore = FavStore.shared
     @ObservedObject var categoryStore = CategoryStore.shared
     @State var isLoading = false
+    @State var title: String = ""
+    
     
     var categoryId: String?
     
@@ -39,13 +42,21 @@ struct NewFavView: View {
                             .autocapitalization(.none)
                             .disabled(!self.pageInfoObserver.pageInfo.dispTitle.isEmpty)
                             .foregroundColor(!self.pageInfoObserver.pageInfo.dispTitle.isEmpty ? Color.secondary : Color.primary)
-                        }                    }
+                        }
+                    }
+                    
                     if !self.pageInfoObserver.pageInfo.dispTitle.isEmpty {
                         Section {
                             HStack {
-                                TextField("タイトルを入力してください", text: $pageInfoObserver.pageInfo.dispTitle)
+                                TextField("タイトルを入力してください", text: $title)
                                     .autocapitalization(.none)
-                                    .disabled(self.pageInfoObserver.pageInfo.dispTitle.isEmpty)
+                            }
+                            .onAppear() {
+                                // カテゴリ選択から戻ったときに再度titleに取得値が設定されないように制御する
+                                if self.titleFirstAppear {
+                                    self.title = self.pageInfoObserver.pageInfo.dispTitle
+                                    self.titleFirstAppear.toggle()
+                                }
                             }
                             Picker(selection: $categorySelection, label: Text("カテゴリ")) {
                                 ForEach(0 ..< categoryItems.count) {
@@ -56,7 +67,6 @@ struct NewFavView: View {
                     }
                 }
                 .listStyle(GroupedListStyle())
-                
                 
                 // インジケータ
                 if self.pageInfoObserver.isLoading {
@@ -87,7 +97,7 @@ struct NewFavView: View {
                 self.favStore.add(url: self.newUrl,
                                   category: categoryItems[self.categorySelection].id,
                                   comment: "",
-                                  dispTitle: self.pageInfoObserver.pageInfo.dispTitle,
+                                  dispTitle: self.title,
                                   dispDescription: self.pageInfoObserver.pageInfo.dispDescription,
                                   imageUrl: self.pageInfoObserver.pageInfo.imageUrl,
                                   titleOnHeader: self.pageInfoObserver.pageInfo.titleOnHeader,
@@ -107,7 +117,7 @@ struct NewFavView: View {
             }) {
                 Text("作成")
             }
-            .disabled(self.pageInfoObserver.pageInfo.dispTitle.isEmpty))
+            .disabled(self.title.isEmpty))
         }
     }
     
