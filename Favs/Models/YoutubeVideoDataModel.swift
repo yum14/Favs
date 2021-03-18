@@ -60,18 +60,18 @@ class YoutubeVideoDataModel: WebAccessible {
                 }
                 return
             }
-
-            do {
-                try DispatchQueue.main.sync {
-                    let decoder = JSONDecoder()
-                    decoder.keyDecodingStrategy = .convertFromSnakeCase
+            
+            DispatchQueue.main.sync {
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                
+                do {
                     let videoData = try decoder.decode(YoutubeVideo.self, from: data)
                     let pageInfo = self.mapPageInfo(url: url, data: videoData)
-                    
                     completion(pageInfo, nil)
+                } catch let error {
+                    completion(nil, error)
                 }
-            } catch let error {
-                completion(nil, error)
             }
         }
         task.resume()

@@ -36,28 +36,31 @@ class SharedFavObserver: NSObject {
             
             for item in sharedFavs {
                 let completion = { (pageInfo: PageInfo?, error: Error?) in
-                    guard let pageInfo = pageInfo else {
-                        return
+                    if let pageInfo = pageInfo {
+                        self.favStore.add(url: item.url.absoluteString,
+                                          category: self.categoryStore.categoryList.first(where: {$0.isInitial})!.id,
+                                          comment: "",
+                                          dispTitle: YoutubeVideoDataModel.isTarget(url: item.url) && item.url.absoluteString == item.title ? pageInfo.dispTitle : item.title,
+                                          dispDescription: pageInfo.dispDescription,
+                                          imageUrl: pageInfo.imageUrl,
+                                          titleOnHeader: pageInfo.titleOnHeader,
+                                          ogTitle: pageInfo.ogTitle,
+                                          ogDescription: pageInfo.ogDescription,
+                                          ogType: pageInfo.ogType,
+                                          ogUrl: pageInfo.ogUrl,
+                                          ogImage: pageInfo.ogImage,
+                                          fbAppId: pageInfo.fbAppId,
+                                          twitterCard: pageInfo.twitterCard,
+                                          twitterSite: pageInfo.twitterSite,
+                                          twitterCreator: pageInfo.twitterCreator,
+                                          descriptionOnHeader: pageInfo.descriptionOnHeader,
+                                          thumbnail: pageInfo.thumbnail)
+                    } else {
+                        self.favStore.add(url: item.url.absoluteString,
+                                          category: self.categoryStore.categoryList.first(where: {$0.isInitial})!.id,
+                                          comment: "",
+                                          dispTitle: item.title)
                     }
-                    
-                    self.favStore.add(url: item.url.absoluteString,
-                                      category: self.categoryStore.categoryList.first(where: {$0.isInitial})!.id,
-                                      comment: "",
-                                      dispTitle: YoutubeVideoDataModel.isTarget(url: item.url) && item.url.absoluteString == item.title ? pageInfo.dispTitle : item.title,
-                                      dispDescription: pageInfo.dispDescription,
-                                      imageUrl: pageInfo.imageUrl,
-                                      titleOnHeader: pageInfo.titleOnHeader,
-                                      ogTitle: pageInfo.ogTitle,
-                                      ogDescription: pageInfo.ogDescription,
-                                      ogType: pageInfo.ogType,
-                                      ogUrl: pageInfo.ogUrl,
-                                      ogImage: pageInfo.ogImage,
-                                      fbAppId: pageInfo.fbAppId,
-                                      twitterCard: pageInfo.twitterCard,
-                                      twitterSite: pageInfo.twitterSite,
-                                      twitterCreator: pageInfo.twitterCreator,
-                                      descriptionOnHeader: pageInfo.descriptionOnHeader,
-                                      thumbnail: pageInfo.thumbnail)
                 }
                 
                 // webページ情報の取得
@@ -68,8 +71,8 @@ class SharedFavObserver: NSObject {
             userDefaults?.removeObject(forKey: key)
         }
     }
-
+    
     deinit {
-      userDefaults!.removeObserver(self, forKeyPath: key)
+        userDefaults!.removeObserver(self, forKeyPath: key)
     }
 }
