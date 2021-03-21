@@ -64,12 +64,12 @@ struct CategoryView: View {
                         return
                     }
 
-                    // 削除するカテゴリーのFavのカテゴリーをすべてなしに変更する
+                    // 削除するカテゴリーのFavのカテゴリーをすべてに変更する
                     self.favStore.favs.filter({ $0.category == category.element.id })
                         .sorted(by: { $0.order < $1.order }).forEach({
                             let maxOrder = self.favStore.favs.max(by: { $0.order < $1.order })
 
-                            self.favStore.update(id: $0.id, dispTitle: $0.dispTitle, category: "", order: maxOrder != nil ? maxOrder!.order + 1 : 0)
+                            self.favStore.update(id: $0.id, order: maxOrder != nil ? maxOrder!.order + 1 : 0, category: "", dispTitle: $0.dispTitle)
                         })
 
                     // カテゴリーから削除

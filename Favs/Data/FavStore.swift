@@ -125,7 +125,27 @@ final class FavStore: ObservableObject {
         }
     }
     
-    func update(id: String, dispTitle: String, category: String, order: Int) {
+    func update(id: String,
+                url: String? = nil,
+                order: Int? = nil,
+                category: String? = nil,
+                comment: String? = nil,
+                dispTitle: String? = nil,
+                dispDescription: String? = nil,
+                imageUrl: String? = nil,
+                titleOnHeader: String? = nil,
+                ogTitle: String? = nil,
+                ogDescription: String? = nil,
+                ogType: String? = nil,
+                ogUrl: String? = nil,
+                ogImage: String? = nil,
+                fbAppId: String? = nil,
+                twitterCard: String? = nil,
+                twitterSite: String? = nil,
+                twitterCreator: String? = nil,
+                descriptionOnHeader: String? = nil,
+                thumbnail: String? = nil) {
+        
         guard let item = self.realmObject.favs.first(where: { $0.id == id }) else {
             return
         }
@@ -138,9 +158,24 @@ final class FavStore: ObservableObject {
         
         let realm = try! Realm()
         try! realm.write {
-            item.order = order
-            item.category = category
-            item.dispTitle = dispTitle
+            if let url = url { item.url = url }
+            if let order = order { item.order = order }
+            if let category = category {    item.category = category }
+            if let comment = comment { item.comment = comment }
+            if let dispTitle = dispTitle { item.dispTitle = dispTitle }
+            if let dispDescription = dispDescription { item.dispDescription = dispDescription }
+            if let imageUrl = imageUrl { item.imageUrl = imageUrl }
+            if let titleOnHeader = titleOnHeader { item.titleOnHeader = titleOnHeader }
+            if let ogTitle = ogTitle { item.ogTitle = ogTitle }
+            if let ogDescription = ogDescription { item.ogDescription = ogDescription }
+            if let ogType = ogType { item.ogType = ogType }
+            if let ogUrl = ogUrl { item.ogUrl = ogUrl }
+            if let ogImage = ogImage { item.ogImage = ogImage }
+            if let fbAppId = fbAppId { item.fbAppId = fbAppId }
+            if let twitterCard = twitterCard { item.twitterCard = twitterCard }
+            if let twitterSite = twitterSite { item.twitterSite = twitterSite }
+            if let twitterCreator = twitterCreator { item.twitterCreator = twitterCreator }
+            if let descriptionOnHeader = descriptionOnHeader { item.descriptionOnHeader = descriptionOnHeader }
             item.updatedAt = now
         }
     }

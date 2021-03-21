@@ -8,7 +8,7 @@
 import Foundation
 
 class PageInfoObserver: ObservableObject {
-    @Published var pageInfo: PageInfo = PageInfo()
+    @Published var pageInfo: PageInfo?
     @Published var isLoading: Bool
     
     private let selector: WebAccessSelector
@@ -28,14 +28,14 @@ class PageInfoObserver: ObservableObject {
             self.pageInfo = pageInfo ?? PageInfo()
             self.isLoading = false
             
-            argCompletion(pageInfo, error)
+            argCompletion(pageInfo ?? PageInfo(), error)
         }
  
         do {
             try self.selector.getInstance(url: url).get(url: url, completion: completion)
         } catch let error {
             print(error)
-            self.pageInfo = PageInfo()
+            self.pageInfo = nil
             self.isLoading = false
         }
     }

@@ -13,26 +13,28 @@ class WebPageModel: ObservableObject, WebAccessible {
     func get(url: URL, completion: @escaping (PageInfo?, Error?) -> Void) throws -> Void {
         let request = URLRequest(url: url)
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-            guard let data = data else {
-                // httpは通らない。info.plistのNSAllowsArbitraryLoadsをyesとすれば通せるようだがどうするか。
-                if let error = error {
-                    print(error.localizedDescription)
+            DispatchQueue.main.sync {
+                guard let data = data else {
+                    // httpは通らない。info.plistのNSAllowsArbitraryLoadsをyesとすれば通せるようだがどうするか。
+                    if let error = error {
+                        print(error.localizedDescription)
+                    }
+                    completion(nil, error)
+                    return
                 }
-                return
-            }
-            
-            do {
-                try DispatchQueue.main.sync {
-                    let htmlString = String(data: data, encoding: .utf8) ?? String(data: data, encoding: .shiftJIS) ?? nil
+                
+                let htmlString = String(data: data, encoding: .utf8) ?? String(data: data, encoding: .shiftJIS) ?? nil
+                do {
                     let doc = try HTML(html: htmlString!, encoding: .utf8)
                     var pageInfo = self.htmlParse(url: url, doc: doc)
                     pageInfo.dispTitle = !pageInfo.ogTitle.isEmpty ? pageInfo.ogTitle : pageInfo.titleOnHeader
                     pageInfo.dispDescription = !pageInfo.ogDescription.isEmpty ? pageInfo.ogDescription : pageInfo.descriptionOnHeader
                     pageInfo.imageUrl = !pageInfo.ogImage.isEmpty ? pageInfo.ogImage : pageInfo.thumbnail
                     completion(pageInfo, nil)
+                    
+                } catch let error {
+                    completion(nil, error)
                 }
-            } catch let error {
-                completion(nil, error)
             }
         }
         task.resume()
