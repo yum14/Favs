@@ -35,18 +35,20 @@ struct CategoryDetailView: View {
             
         }
         .navigationBarTitle(Text("カテゴリの編集"))
-        .navigationBarItems(trailing: Button(action: {
-            guard let target = categoryStore.categoryList.first(where: { $0.id == self.id }) else {
-                return
+        .navigationBarItems(
+            trailing: Button(action: {
+                guard let target = categoryStore.categoryList.first(where: { $0.id == self.id }) else {
+                    return
+                }
+                let editCategory = FavCategory(id: target.id, name: self.inputName, displayName: self.inputName, isInitial: target.isInitial, order: target.order, createdAt: target.createdAt)
+                categoryStore.update(editCategory)
+                
+                self.presentationMode.wrappedValue.dismiss()
+            }) {
+                Text("完了")
+                    .padding(.vertical)
             }
-            let editCategory = FavCategory(id: target.id, name: self.inputName, displayName: self.inputName, isInitial: target.isInitial, order: target.order, createdAt: target.createdAt)
-            categoryStore.update(editCategory)
-            
-            self.presentationMode.wrappedValue.dismiss()
-        }) {
-            Text("完了")
-        }
-        .disabled(self.inputName.isEmpty)
+            .disabled(self.inputName.isEmpty)
         )
         .onAppear() {
             if !self.firstAppear {

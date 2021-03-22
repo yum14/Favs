@@ -144,6 +144,7 @@ struct FavDetailView: View {
             self.presentationMode.wrappedValue.dismiss()
         }) {
             Text("完了")
+                .padding(.vertical)
         }
         .disabled(self.title.isEmpty))
     }

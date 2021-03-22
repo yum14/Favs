@@ -35,7 +35,7 @@ struct ImageUrlView: View {
                        minHeight: 0,
                        maxHeight: .infinity,
                        alignment: .center)
-//                .background(Color.secondary)
+                //                .background(Color.secondary)
                 .background(Color("ImageBackground"))
             }
         }

@@ -21,7 +21,7 @@ struct CategoryView: View {
     @State var displayMode: HomeView.DisplayMode = .list
     @State var isDeleteAlertPresented = false
     let initialViewState: ViewState?
-
+    
     var body: some View {
         VStack {
             NavigationLink(destination:
@@ -37,7 +37,7 @@ struct CategoryView: View {
             }
             
             let categories = self.categoryStore.categoryList.map { $0 }
-
+            
             SwiftUI.List {
                 ForEach(categories, id: \.self) { category in
                     HStack {
@@ -63,15 +63,15 @@ struct CategoryView: View {
                         self.isDeleteAlertPresented.toggle()
                         return
                     }
-
+                    
                     // 削除するカテゴリーのFavのカテゴリーをすべてに変更する
                     self.favStore.favs.filter({ $0.category == category.element.id })
                         .sorted(by: { $0.order < $1.order }).forEach({
                             let maxOrder = self.favStore.favs.max(by: { $0.order < $1.order })
-
+                            
                             self.favStore.update(id: $0.id, order: maxOrder != nil ? maxOrder!.order + 1 : 0, category: "", dispTitle: $0.dispTitle)
                         })
-
+                    
                     // カテゴリーから削除
                     self.categoryStore.delete(atOffsets: indexSet)
                 } : nil)
@@ -93,10 +93,10 @@ struct CategoryView: View {
                         .autocapitalization(.none)
                         .padding()
                 }
-
-
+                
+                
                 if !(self.editMode?.wrappedValue.isEditing != nil && self.editMode?.wrappedValue.isEditing == true) {
-
+                    
                     Button(action: {
                         self.isNewRowActive = true
                         self.isFirstResponder = true
@@ -120,7 +120,7 @@ struct CategoryView: View {
             if !self.firstAppear {
                 return
             }
-
+            
             if let initialViewState = self.initialViewState {
                 if let category = self.categoryStore.categoryList.first(where: { $0.id == initialViewState.category }) {
                     self.selectedCategory = category
@@ -142,28 +142,32 @@ struct CategoryView: View {
         }
         .navigationViewStyle(StackNavigationViewStyle())
         .navigationBarItems(trailing:
-                                        HStack {
-                                            if editMode?.wrappedValue.isEditing ?? false {
-                                                Button(action: {
-                                                    withAnimation {
-                                                        self.editMode?.wrappedValue = .inactive
-                                                    }
-                                                }) {
-                                                    Image(systemName: "checkmark.circle")
-                                                        .foregroundColor(Color("NavigationBarItem"))
-                                                }
-                                            } else {
-                                                Button(action: {
-                                                    withAnimation {
-                                                        self.editMode?.wrappedValue = .active
-                                                    }
-                                                }) {
-                                                    Image(systemName: "square.and.pencil")
-                                                        .foregroundColor(!self.editButtonDisabled ? Color("NavigationBarItem") : Color.secondary)
-                                                }
-                                                .disabled(self.editButtonDisabled)
+                                HStack {
+                                    if editMode?.wrappedValue.isEditing ?? false {
+                                        Button(action: {
+                                            withAnimation {
+                                                self.editMode?.wrappedValue = .inactive
                                             }
-                                        })
+                                        }) {
+                                            Text("完了")
+                                                .fontWeight(.bold)
+                                                .foregroundColor(Color("NavigationBarItem"))
+                                                .padding(.vertical)
+                                        }
+                                    } else {
+                                        Button(action: {
+                                            withAnimation {
+                                                self.editMode?.wrappedValue = .active
+                                            }
+                                        }) {
+                                            Image(systemName: "square.and.pencil")
+                                                .foregroundColor(!self.editButtonDisabled ? Color("NavigationBarItem") : Color.secondary)
+                                                .font(.title3)
+                                                .padding(.vertical)
+                                        }
+                                        .disabled(self.editButtonDisabled)
+                                    }
+                                })
         .navigationBarTitle(Text("カテゴリ"), displayMode: .inline)
     }
 }

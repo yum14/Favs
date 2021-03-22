@@ -90,6 +90,9 @@ struct NewFavView: View {
                 self.presentationMode.wrappedValue.dismiss()
             }) {
                 Image(systemName: "xmark")
+                    .foregroundColor(Color("NavigationBarItem"))
+                    .font(.title3)
+                    .padding(.vertical)
                 
             }, trailing: Button(action: {
                 
@@ -116,6 +119,7 @@ struct NewFavView: View {
                 self.presentationMode.wrappedValue.dismiss()
             }) {
                 Text("作成")
+                    .padding(.vertical)
             }
             .disabled(self.title.isEmpty))
         }

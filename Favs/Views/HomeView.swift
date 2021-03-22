@@ -45,18 +45,18 @@ struct HomeView: View {
                             FavDetailView(id: self.selectedFav.id)
                         } else {
                             WebViewWrapper(url: self.selectedFav.url)
-                                .navigationBarTitle(URLHelper.getDomain(self.selectedFav.url), displayMode: .inline
-                                )
+                            //                                .navigationBarTitle(URLHelper.getDomain(self.selectedFav.url), displayMode: .inline
+                            //                                )
                         }
                     },
                     isActive: $isWebViewActive
                 ) { EmptyView() }
-
+                
                 // アクションシートからの起動用
                 NavigationLink(
                     destination:
                         FavDetailView(id: self.selectedFav.id),
-                        isActive: $isDeitaiViewActiveOnSheet
+                    isActive: $isDeitaiViewActiveOnSheet
                 ) { EmptyView() }
                 
                 if let category = self.categoryStore.categoryList.first(where: { $0.id == self.categoryId }) {
@@ -91,8 +91,8 @@ struct HomeView: View {
                             self.viewStateStore.update(newState)
                         }
                     }
-                        .padding(.vertical, 8)
-                        .padding(.horizontal, 16)
+                    .padding(.vertical, 8)
+                    .padding(.horizontal, 16)
                 }
             }
         }
@@ -120,15 +120,17 @@ struct HomeView: View {
                 ShareSheet(activityItems: [self.selectedFav.url])
             }
         }
+        // TODO: navigationBarItemは非推奨であるためそのうちtoolbarに変更する。FontWeightが効かなかったので現状はnavigationBarItemで実装
         .navigationBarItems(
             leading: Button(action: {
                 self.presentationMode.wrappedValue.dismiss()
             }) {
                 Image(systemName: "chevron.backward")
                     .foregroundColor(Color("NavigationBarItem"))
-                    .font(.body, weight: .bold)
-            }
-            .padding(.trailing),
+                    .font(.title3)
+                    .padding(.vertical)
+                    .padding(.trailing)
+            },
             center: Button(action: {
                 withAnimation {
                     self.scrollViewProxy?.scrollTo(0, anchor: .top)
@@ -137,6 +139,7 @@ struct HomeView: View {
                 Text(self.getNavigationBarTitle(categories: self.categoryStore.categoryList, categoryId: self.categoryId))
                     .foregroundColor(Color("NavigationBarItem"))
                     .font(.body, weight: .bold)
+                    .padding()
             },
             trailing:
                 HStack {
@@ -146,19 +149,20 @@ struct HomeView: View {
                                 self.editMode?.wrappedValue = .inactive
                             }
                         }) {
-                            Image(systemName: "checkmark.circle")
+                            Text("完了")
+                                .fontWeight(.bold)
                                 .foregroundColor(Color("NavigationBarItem"))
-                                .font(.body, weight: .bold)
+                                .padding(.vertical)
                         }
                     } else {
-                        
                         Button(action: {
                             self.presentationType = .new
                             self.isSheetActive = true
                         }) {
                             Image(systemName: "plus")
                                 .foregroundColor(Color("NavigationBarItem"))
-                                .font(.body, weight: .bold)
+                                .font(.title3)
+                                .padding(.vertical)
                         }
                         
                         if self.displayMode == .list && self.favStore.favs.count > 0 {
@@ -169,7 +173,8 @@ struct HomeView: View {
                             }) {
                                 Image(systemName: "square.and.pencil")
                                     .foregroundColor(Color("NavigationBarItem"))
-                                    .font(.body, weight: .bold)
+                                    .font(.title3)
+                                    .padding(.vertical)
                             }
                         }
                     }

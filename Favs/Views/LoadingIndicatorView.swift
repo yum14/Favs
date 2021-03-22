@@ -11,7 +11,7 @@ struct LoadingIndicatorView: View {
     let isLoading: Bool
     @State private var isAnimating = false
     private let animation = Animation.linear(duration: 1).repeatForever(autoreverses: false)
-
+    
     var body: some View {
         GeometryReader { geometry in
             ZStack {
@@ -31,7 +31,7 @@ struct LoadingIndicatorView: View {
                                 dashPhase: 8))
                     .frame(width: 48, height: 48)
                     .rotationEffect(.degrees(self.isAnimating ? 360 : 0))
-                    // ②アニメーションの実装
+                    
                     .onAppear() {
                         withAnimation(Animation.linear(duration: 1).repeatForever(autoreverses: false)) {
                             self.isAnimating = true
@@ -41,7 +41,7 @@ struct LoadingIndicatorView: View {
                         self.isAnimating = false
                     }
             }
-             // Loading中だけLoading画面が表示されるようにする。
+            // Loading中だけLoading画面が表示されるようにする。
             .hidden(!self.isLoading)
         }
     }
