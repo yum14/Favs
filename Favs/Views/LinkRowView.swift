@@ -45,6 +45,7 @@ struct LinkRowView: View {
             }
             .frame(height: rowHeight)
         }
+        .background(Color.systemBackground)
     }
 }
 

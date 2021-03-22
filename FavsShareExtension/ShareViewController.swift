@@ -27,6 +27,7 @@ class ShareViewController: SLComposeServiceViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        // youtubeの場合はPlainTextでURLが設定されるため保持しておく
         self.initialContentText = self.contentText
     }
     
