@@ -79,7 +79,7 @@ class YoutubeVideoDataModel: WebAccessible {
     
     private func mapPageInfo(url: URL, data: YoutubeVideo) -> PageInfo {
         let snippet = data.items[0].snippet!
-        let pageInfo = PageInfo(url: url.absoluteString, dispTitle: snippet.title, dispDescription: snippet.description, imageUrl: snippet.thumbnails.standard!.url)
+        let pageInfo = PageInfo(url: url.absoluteString, dispTitle: snippet.title, dispDescription: snippet.description, imageUrl: snippet.thumbnails.standard?.url ?? "")
         
         return pageInfo
     }
