@@ -531,6 +531,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = FavsShareExtension/FavsShareExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = TB8F2PW523;
 				INFOPLIST_FILE = FavsShareExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -553,6 +554,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = FavsShareExtension/FavsShareExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = TB8F2PW523;
 				INFOPLIST_FILE = FavsShareExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
