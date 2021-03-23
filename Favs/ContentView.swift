@@ -7,14 +7,25 @@
 
 import SwiftUI
 
+let coloredNavAppearance = UINavigationBarAppearance()
+
 struct ContentView: View {
     private let viewStateStore = ViewStateStore.shared
     private let sharedFavObserver = SharedFavObserver()
     
     init() {
+        coloredNavAppearance.configureWithOpaqueBackground()
+        coloredNavAppearance.backgroundColor = UIColor(Color("NavigationBar"))
+        coloredNavAppearance.titleTextAttributes = [.foregroundColor: UIColor(Color("NavigationBarItem"))]
+        coloredNavAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor(Color("NavigationBarItem"))]
+
+        UINavigationBar.appearance().standardAppearance = coloredNavAppearance
+        UINavigationBar.appearance().scrollEdgeAppearance = coloredNavAppearance
+        UINavigationBar.appearance().compactAppearance = coloredNavAppearance
+
         UINavigationBar.appearance().barTintColor = UIColor(Color("NavigationBar"))
         UINavigationBar.appearance().tintColor = UIColor(Color("NavigationBarItem"))
-        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor : UIColor(Color("NavigationBarItem"))]
+
     }
     
     var body: some View {
