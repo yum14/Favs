@@ -178,6 +178,7 @@
 				7523827B2539DD170033F4D9 /* LinkCardView.swift */,
 				7523828C253AB5F60033F4D9 /* WebViewWrapper.swift */,
 				75FF4E37253C33D7005BCE19 /* ShareSheet.swift */,
+				75B583F6259995D000C4E336 /* CategoryView.swift */,
 				75FF4E40253C655F005BCE19 /* CategoryDetailView.swift */,
 				759DD2C0253F3E8C009F5400 /* ImageUrlView.swift */,
 				7533CDA02540705000B49A60 /* FAB.swift */,
@@ -186,7 +187,6 @@
 				75826C21258EE2400032AD6E /* LoadingIndicatorView.swift */,
 				759D724125977121007D7602 /* LinkRowView.swift */,
 				758C7C8C25988BA000D94D50 /* FavList.swift */,
-				75B583F6259995D000C4E336 /* CategoryView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -539,7 +539,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.inakase.Favs.FavsShareExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -561,7 +561,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.inakase.Favs.FavsShareExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -704,7 +704,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.inakase.Favs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -730,7 +730,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.inakase.Favs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
