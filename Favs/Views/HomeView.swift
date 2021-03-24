@@ -45,8 +45,6 @@ struct HomeView: View {
                             FavDetailView(id: self.selectedFav.id)
                         } else {
                             WebViewWrapper(url: self.selectedFav.url)
-                            //                                .navigationBarTitle(URLHelper.getDomain(self.selectedFav.url), displayMode: .inline
-                            //                                )
                         }
                     },
                     isActive: $isWebViewActive
@@ -125,21 +123,28 @@ struct HomeView: View {
             leading: Button(action: {
                 self.presentationMode.wrappedValue.dismiss()
             }) {
-                Image(systemName: "chevron.backward")
-                    .foregroundColor(Color("NavigationBarItem"))
-                    .font(.title3)
-                    .padding(.vertical)
-                    .padding(.trailing)
+                if UIDevice.current.userInterfaceIdiom != .pad {
+                    Image(systemName: "chevron.backward")
+                        .foregroundColor(Color("NavigationBarItem"))
+                        .font(.title3)
+                        .padding(.vertical)
+                        .padding(.trailing)
+                }
             },
             center: Button(action: {
                 withAnimation {
                     self.scrollViewProxy?.scrollTo(0, anchor: .top)
                 }
             }) {
-                Text(self.getNavigationBarTitle(categories: self.categoryStore.categoryList, categoryId: self.categoryId))
-                    .foregroundColor(Color("NavigationBarItem"))
-                    .font(.body, weight: .bold)
-                    .padding()
+                // iPadの場合に1つ前の表示したテキストの長さからWidthが拡張してくれない（バグ？）
+                // よって自分でwidthを設定しておく
+                GeometryReader { geometry in
+                    Text(self.getNavigationBarTitle(categories: self.categoryStore.categoryList, categoryId: self.categoryId))
+                        .foregroundColor(Color("NavigationBarItem"))
+                        .font(.body, weight: .bold)
+                        .frame(width: geometry.size.width * 0.9)
+                        .padding()
+                }
             },
             trailing:
                 HStack {
