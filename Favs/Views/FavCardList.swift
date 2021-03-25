@@ -22,26 +22,30 @@ struct FavCardList: View {
                 let favs = self.getFavs(categoryId: self.categoryId, favs: self.favStore.favs.map { $0 })
                 
                 if favs.count > 0 {
-                    
-                    SwiftUI.List {
-                        
-                        ForEach(favs.indices, id: \.self) { index in
-                            LinkCardView(url: favs[index].url,
-                                         title: favs[index].dispTitle,
-                                         imageUrl: favs[index].imageUrl,
-                                         width: UIScreen.main.bounds.width * 0.9)
-                                .padding(.vertical, 8)
-                                .onTapGesture {
-                                    self.favSelection = index
-                                    self.selectedFav = favs[index]
-                                    self.isWebViewActive.toggle()
-                                }
-                                .onLongPressGesture {
-                                    self.favSelection = index
-                                    self.selectedFav = favs[index]
-                                    self.isLongTapped = true
+                    GeometryReader { geometry in
+                        SwiftUI.List {
+                            ForEach(favs.indices, id: \.self) { index in
+                                HStack {
+                                    Spacer()
+                                    LinkCardView(url: favs[index].url,
+                                                 title: favs[index].dispTitle,
+                                                 imageUrl: favs[index].imageUrl,
+                                                 width: geometry.size.width * 0.86)
+                                        .padding(.vertical, UIDevice.current.userInterfaceIdiom != .pad ? 6 : 16)
+                                        .onTapGesture {
+                                            self.favSelection = index
+                                            self.selectedFav = favs[index]
+                                            self.isWebViewActive.toggle()
+                                        }
+                                        .onLongPressGesture {
+                                            self.favSelection = index
+                                            self.selectedFav = favs[index]
+                                            self.isLongTapped = true
+                                        }
+                                    Spacer()
                                 }
                                 .id(index)
+                            }
                         }
                     }
                 } else {
