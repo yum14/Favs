@@ -43,6 +43,7 @@ struct HomeView: View {
                     destination: Group {
                         if editMode?.wrappedValue.isEditing ?? false {
                             FavDetailView(id: self.selectedFav.id)
+                                .environmentObject(TimerHolder())
                         } else {
                             WebViewWrapper(url: self.selectedFav.url)
                         }
@@ -53,7 +54,8 @@ struct HomeView: View {
                 // アクションシートからの起動用
                 NavigationLink(
                     destination:
-                        FavDetailView(id: self.selectedFav.id),
+                        FavDetailView(id: self.selectedFav.id)
+                        .environmentObject(TimerHolder()),
                     isActive: $isDeitaiViewActiveOnSheet
                 ) { EmptyView() }
                 
