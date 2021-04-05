@@ -547,7 +547,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = FavsShareExtension/FavsShareExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = TB8F2PW523;
 				INFOPLIST_FILE = FavsShareExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -570,7 +570,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = FavsShareExtension/FavsShareExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = TB8F2PW523;
 				INFOPLIST_FILE = FavsShareExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -713,7 +713,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Favs/Favs.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Favs/Preview Content\"";
 				DEVELOPMENT_TEAM = TB8F2PW523;
 				ENABLE_PREVIEWS = YES;
@@ -740,7 +740,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Favs/Favs.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Favs/Preview Content\"";
 				DEVELOPMENT_TEAM = TB8F2PW523;
 				ENABLE_PREVIEWS = YES;
