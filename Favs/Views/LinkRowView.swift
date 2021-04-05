@@ -8,23 +8,24 @@
 import SwiftUI
 
 struct LinkRowView: View {
-    var url: String
-    var title: String
-    var imageUrl: String
+    var content: LinkContent
+    var createActionSheet: ((LinkContent) -> ActionSheet)?
+    var onTapGesture: (LinkContent) -> Void = {_ in }
     
-    let rowHeight: CGFloat = 76
+    @State private var isActionSheetActive: Bool = false
+    private let rowHeight: CGFloat = 76
     
     var body: some View {
         HStack(spacing: 0) {
-            ImageUrlView(url: imageUrl)
+            ImageUrlView(url: self.content.imageUrl)
                 .scaledToFill()
-                .frame(width: rowHeight * 16/9, height: rowHeight, alignment: .center)
+                .frame(width: rowHeight * 16/9, height: self.rowHeight, alignment: .center)
                 .clipped()
                 .cornerRadius(2)
             
             VStack(spacing: 0) {
                 HStack(spacing: 0) {
-                    Text(title)
+                    Text(self.content.title)
                         .font(.subheadline)
                         .foregroundColor(.primary)
                         .lineLimit(2)
@@ -36,7 +37,7 @@ struct LinkRowView: View {
                 Spacer()
                 HStack(spacing: 0) {
                     Spacer()
-                    Text(URLHelper.getDomain(url))
+                    Text(URLHelper.getDomain(self.content.url))
                         .foregroundColor(.secondary)
                         .font(.caption)
                         .padding(.horizontal)
@@ -46,13 +47,26 @@ struct LinkRowView: View {
             .frame(height: rowHeight)
         }
         .background(Color.systemBackground)
+        
+        // iPadの場合、ActionSheetは吹き出しになるため、行に対して設定しないと表示場所がおかしくなる
+        // よってこのActionSheetはこのView内部で指定する
+        .actionSheet(isPresented: self.$isActionSheetActive) {
+            guard let createActionSheet = self.createActionSheet else {
+                return ActionSheet(title: Text(""))
+            }
+            return createActionSheet(self.content)
+        }
+        .onTapGesture {
+            self.onTapGesture(self.content)
+        }
+        .onLongPressGesture {
+            self.isActionSheetActive = true
+        }
     }
 }
 
 struct LinkRowView_Previews: PreviewProvider {
     static var previews: some View {
-        LinkRowView(url: "https://www.google.co.jp",
-                    title: "Google",
-                    imageUrl: "")
+        LinkRowView(content: LinkContent(id: "", url: "https://www.google.co.jp", title: "Google", imageUrl: ""))
     }
 }

@@ -49,35 +49,41 @@ struct FavDetailView: View {
                             }
                         }
                     }
-                    .onAppear {
-                        if self.pageReloaded {
-                            self.pageReloaded.toggle()
-                            
-                            if let pageInfo = self.pageInfoObserver.pageInfo {
-                                self.title = !pageInfo.dispTitle.isEmpty ? pageInfo.dispTitle : "タイトルなし"
-                            }
-                        }
-                    }
                     
                     Section {
-                        HStack(spacing: 0) {
-                            Spacer()
-                            Button("再読み込み") {
-                                self.reloadAlertPresented.toggle()
+                        ZStack {
+                            HStack(spacing: 0) {
+                                Spacer()
+                                Button("再読み込み") {
+                                    self.reloadAlertPresented.toggle()
+                                }
+                                .frame(alignment: .center)
+                                .alert(isPresented: $reloadAlertPresented) {
+                                    Alert(title: Text("WEBページを再度読み込みますか？"),
+                                          message: Text("入力したタイトルが上書きされます。またサムネイル画像が更新されます。"),
+                                          primaryButton: .cancel(),
+                                          secondaryButton: .destructive(Text("再読み込み")) {
+                                            
+                                            // reload
+                                            self.pageInfoObserver.get(url: URL(string: self.url)!, completion: {(pageInfo, error) in
+                                                guard let pageInfo = pageInfo else {
+                                                    self.title = "タイトルなし"
+                                                    return
+                                                }
+                                                self.title = !pageInfo.dispTitle.isEmpty ? pageInfo.dispTitle : "タイトルなし"
+                                            })
+                                          })
+                                }
+                                .disabled(pageReloaded)
+                                Spacer()
                             }
-                            .frame(alignment: .center)
-                            .alert(isPresented: $reloadAlertPresented) {
-                                Alert(title: Text("WEBページを再度読み込みますか？"),
-                                      message: Text("入力したタイトルが上書きされます。またサムネイル画像が更新されます。"),
-                                      primaryButton: .cancel(),
-                                      secondaryButton: .destructive(Text("再読み込み")) {
-                                        self.pageReloaded = true
-                                        
-                                        // reload
-                                        self.pageInfoObserver.get(url: URL(string: self.url)!)
-                                      })
+                            
+                            if self.pageReloaded {
+                                CountDownIndicatorView(lineWidth: 4, font: .body, count: 10, onStopped: {
+                                    self.pageReloaded = false
+                                })
+                                .background(Color("Main"))
                             }
-                            Spacer()
                         }
                     }
                     .listRowBackground(Color("Main"))
@@ -91,6 +97,9 @@ struct FavDetailView: View {
             // インジケータ
             if self.pageInfoObserver.isLoading {
                 LoadingIndicatorView(isLoading: self.pageInfoObserver.isLoading)
+                    .onDisappear {
+                        self.pageReloaded = true
+                    }
             }
         }
         .onAppear {
@@ -172,7 +181,8 @@ struct FavDetailView_Previews: PreviewProvider {
         let categoryStoreMock = CategoryStore(categories: categories)
         
         return NavigationView {
-            FavDetailView(id: "a", favStore: favStoreMock, categoryStore: categoryStoreMock)
+            FavDetailView(id: "a", favStore: favStoreMock, categoryStore: categoryStoreMock )
+                .environmentObject(TimerHolder())
         }
     }
 }
