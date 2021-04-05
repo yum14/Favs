@@ -38,6 +38,7 @@ struct ContentView: View {
             }
         }
         .accentColor(Color("Main"))
+        .navigationViewStyle(StackNavigationViewStyle())
     }
     
     func getInitialViewState() -> ViewState? {

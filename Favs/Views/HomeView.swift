@@ -11,21 +11,22 @@ import Parchment
 import RealmSwift
 
 struct HomeView: View {
-    @State private var isSheetActive = false
-    @State private var selectedFav: Fav = Fav()
-    @State private var presentationType: PresentationType = PresentationType.new
-    @ObservedObject var favStore = FavStore.shared
-    @ObservedObject var categoryStore = CategoryStore.shared
-    private let viewStateStore = ViewStateStore.shared
-    @State private var isActionSheetActive = false
-    @State private var isWebViewActive = false
-    @Environment(\.editMode) var editMode
-    @Environment(\.presentationMode) var presentationMode
-    @State private var isDeitaiViewActiveOnSheet = false
-    @State private var scrollViewProxy: ScrollViewProxy?
-    
     var categoryId: String?
     @Binding var displayMode: DisplayMode
+    
+    @State private var selectedLink: LinkContent = LinkContent()
+    @State private var presentationType: PresentationType = PresentationType.new
+    @ObservedObject private var favStore = FavStore.shared
+    @ObservedObject private var categoryStore = CategoryStore.shared
+    private let viewStateStore = ViewStateStore.shared
+    
+    @State private var isActionSheetActive = false
+    @State private var isSheetActive = false
+    @State private var isWebViewActive = false
+    @Environment(\.editMode) private var editMode
+    @Environment(\.presentationMode) private var presentationMode
+    @State private var isDetailViewActiveOnSheet = false
+    @State private var scrollViewProxy: ScrollViewProxy?
     
     enum PresentationType {
         case new
@@ -39,40 +40,41 @@ struct HomeView: View {
     var body: some View {
         ZStack {
             VStack(spacing: 0) {
+                // Tap時の画面遷移
                 NavigationLink(
                     destination: Group {
                         if editMode?.wrappedValue.isEditing ?? false {
-                            FavDetailView(id: self.selectedFav.id)
+                            FavDetailView(id: self.selectedLink.id)
                                 .environmentObject(TimerHolder())
                         } else {
-                            WebViewWrapper(url: self.selectedFav.url)
+                            WebViewWrapper(url: self.selectedLink.url)
                         }
                     },
                     isActive: $isWebViewActive
                 ) { EmptyView() }
                 
-                // アクションシートからの起動用
+                // アクションシートからの画面遷移
                 NavigationLink(
                     destination:
-                        FavDetailView(id: self.selectedFav.id)
+                        FavDetailView(id: self.selectedLink.id)
                         .environmentObject(TimerHolder()),
-                    isActive: $isDeitaiViewActiveOnSheet
+                    isActive: $isDetailViewActiveOnSheet
                 ) { EmptyView() }
                 
                 if let category = self.categoryStore.categoryList.first(where: { $0.id == self.categoryId }) {
                     if self.displayMode == .card {
-                        FavCardList(categoryId: category.isInitial ? nil : self.categoryId,
-                                    selectedFav: $selectedFav,
-                                    isLongTapped: $isActionSheetActive,
-                                    isWebViewActive: $isWebViewActive,
-                                    scrollViewProxy: $scrollViewProxy)
+                        
+                        FavCardList(contents: createContentsByCategory(category: category, favs: self.favStore.favs.map {$0}),
+                                    createActionSheet: self.createActionSheet,
+                                    onTapGesture: self.onLinkTapGesture,
+                                    scrollViewProxy: self.$scrollViewProxy)
                     } else {
-                        FavList(categoryId: category.isInitial ? nil : self.categoryId,
-                                selectedFav: $selectedFav,
-                                isLongTapped: $isActionSheetActive,
-                                isWebViewActive: $isWebViewActive,
-                                scrollViewProxy: $scrollViewProxy)
-                            .padding(.top)
+                        FavList(contents: createContentsByCategory(category: category, favs: self.favStore.favs.map {$0}),
+                                createActionSheet: self.createActionSheet,
+                                onTapGesture: self.onLinkTapGesture,
+                                onMove: self.onMove,
+                                onDelete: self.onDelete,
+                                scrollViewProxy: self.$scrollViewProxy)
                     }
                 }
             }
@@ -100,24 +102,12 @@ struct HomeView: View {
             let newState = ViewState(category: self.categoryId ?? "", displayMode: self.displayMode.rawValue)
             self.viewStateStore.update(newState)
         }
-        .actionSheet(isPresented: $isActionSheetActive) {
-            ActionSheet(title: Text(self.selectedFav.url), buttons: [
-                .default(Text("共有")) {
-                    self.presentationType = .share
-                    self.isSheetActive = true
-                },
-                .default(Text("編集")) {
-                    self.isDeitaiViewActiveOnSheet = true
-                },
-                .cancel()
-            ])
-        }
         .sheet(isPresented: $isSheetActive) {
             switch self.presentationType {
             case .new:
                 NewFavView(categoryId: self.categoryId)
             case .share:
-                ShareSheet(activityItems: [self.selectedFav.url])
+                ShareSheet(activityItems: [self.selectedLink.url])
             }
         }
         // TODO: navigationBarItemは非推奨であるためそのうちtoolbarに変更する。FontWeightが効かなかったので現状はnavigationBarItemで実装
@@ -125,13 +115,13 @@ struct HomeView: View {
             leading: Button(action: {
                 self.presentationMode.wrappedValue.dismiss()
             }) {
-                if UIDevice.current.userInterfaceIdiom != .pad {
-                    Image(systemName: "chevron.backward")
-                        .foregroundColor(Color("NavigationBarItem"))
-                        .font(.title3)
-                        .padding(.vertical)
-                        .padding(.trailing)
-                }
+//                if UIDevice.current.userInterfaceIdiom != .pad {
+                Image(systemName: "chevron.backward")
+                    .foregroundColor(Color("NavigationBarItem"))
+                    .font(.title3)
+                    .padding(.vertical)
+                //                        .padding(.trailing)
+                //                }
             },
             center: Button(action: {
                 withAnimation {
@@ -198,6 +188,41 @@ struct HomeView: View {
         }
         
         return categories.first(where: { $0.id == category })?.displayName ?? ""
+    }
+    
+    
+    func onLinkTapGesture(content: LinkContent) -> Void {
+        self.selectedLink = content
+        self.isWebViewActive = true
+    }
+    
+    func createActionSheet(content: LinkContent) -> ActionSheet {
+        return ActionSheet(title: Text(content.url), buttons: [
+            .default(Text("編集")) {
+                self.selectedLink = content
+                self.isDetailViewActiveOnSheet = true
+            },
+            .default(Text("共有")) {
+                self.selectedLink = content
+                self.presentationType = .share
+                self.isSheetActive = true
+            },
+            .cancel()
+        ])
+    }
+    
+    func createContentsByCategory(category: FavCategory, favs: [Fav]) -> [LinkContent] {
+        let filtered = category.isInitial ? favs : favs.filter({ $0.category == category.id })
+        
+        return filtered.map { LinkContent(id: $0.id, url: $0.url, title: $0.dispTitle, imageUrl: $0.imageUrl) }
+    }
+    
+    func onMove(from: IndexSet, to: Int) -> Void {
+        self.favStore.move(fromOffsets: from, toOffset: to)
+    }
+    
+    func onDelete(at: IndexSet) -> Void {
+        self.favStore.delete(atOffsets: at)
     }
 }
 

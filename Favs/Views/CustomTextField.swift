@@ -78,13 +78,8 @@ struct CustomTextField: UIViewRepresentable {
         
         public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
             textField.resignFirstResponder()
-            
             return true
         }
-        //        func textFieldDidChangeSelection(_ textField: UITextField) {
-        //            text = textField.text ?? ""
-        //        }
-        
     }
     
 }

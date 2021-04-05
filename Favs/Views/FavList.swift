@@ -9,43 +9,27 @@ import SwiftUI
 import RealmSwift
 
 struct FavList: View {
-    var categoryId: String?
-    @State private var favSelection = 0
-    @Binding var selectedFav: Fav
-    @Binding var isLongTapped: Bool
-    @Binding var isWebViewActive: Bool
-    @ObservedObject var favStore = FavStore.shared
-    @Environment(\.editMode) var editMode
+    var contents: [LinkContent]
+    var createActionSheet: ((LinkContent) -> ActionSheet)?
+    var onTapGesture: (LinkContent) -> Void = {_ in }
+    var onMove: ((IndexSet, Int) -> Void)?
+    var onDelete: ((IndexSet) -> Void)?
+    
     @Binding var scrollViewProxy: ScrollViewProxy?
     
     var body: some View {
         ScrollViewReader { proxy in
             VStack(spacing: 0) {
-                if self.getFavs(categoryId: self.categoryId, favs: self.favStore.favs.map { $0 }).count > 0 {
-                    
+                if self.contents.count > 0 {
                     SwiftUI.List {
-                        ForEach(self.favStore.favs.indices, id: \.self) { index in
-                            if self.categoryId == nil || self.categoryId == self.favStore.favs[index].category {
-                                LinkRowView(url: self.favStore.favs[index].url,
-                                            title: self.favStore.favs[index].dispTitle,
-                                            imageUrl: self.favStore.favs[index].imageUrl)
-                                    .onTapGesture {
-                                        self.selectedFav = self.favStore.favs[index]
-                                        self.isWebViewActive.toggle()
-                                    }
-                                    .onLongPressGesture {
-                                        self.selectedFav = self.favStore.favs[index]
-                                        self.isLongTapped = true
-                                    }
-                                    .id(index)
-                            }
+                        ForEach(self.contents.indices, id: \.self) { index in
+                            LinkRowView(content: self.contents[index],
+                                        createActionSheet: self.createActionSheet,
+                                        onTapGesture: self.onTapGesture)
+                                .id(index)
                         }
-                        .onMove { indices, newOffset in
-                            self.favStore.move(fromOffsets: indices, toOffset: newOffset)
-                        }
-                        .onDelete(perform: editMode?.wrappedValue.isEditing ?? false ? { indexSet in
-                            self.favStore.delete(atOffsets: indexSet)
-                        } : nil)
+                        .onMove(perform: self.onMove)
+                        .onDelete(perform: self.onDelete)
                     }
                 } else {
                     EmptyView()
@@ -68,13 +52,12 @@ struct FavList: View {
 
 struct FavList_Previews: PreviewProvider {
     static var previews: some View {
-        let favs = [
-            Fav(id: "a", url: "https://apple.com", order: 0, category: "category1", dispTitle: "title1", imageUrl: ""),
-            Fav(id: "b", url: "https://apple.com", order: 1, category: "category1", dispTitle: "title2", imageUrl: ""),
-            Fav(id: "c", url: "https://apple.com", order: 2, category: "category1", dispTitle: "title3", imageUrl: "")
+        let contents = [
+            LinkContent(id: "a", url: "https://apple.com", title: "title1", imageUrl: ""),
+            LinkContent(id: "b", url: "https://apple.com", title: "title2", imageUrl: ""),
+            LinkContent(id: "c", url: "https://apple.com", title: "title3", imageUrl: "")
         ]
-        let favStoreMock = FavStore(favs: favs)
         
-        FavList(categoryId: favs.first!.category, selectedFav: .constant(favs.first!), isLongTapped: .constant(false), isWebViewActive: .constant(false), favStore: favStoreMock, scrollViewProxy: .constant(nil))
+        FavList(contents: contents, scrollViewProxy: .constant(nil))
     }
 }

@@ -41,13 +41,6 @@ struct FavDetailView: View {
                         HStack {
                             TextField("タイトルを入力してください", text: $title)
                                 .autocapitalization(.none)
-                                .onAppear {
-                                    if self.pageReloaded {
-                                        if let pageInfo = self.pageInfoObserver.pageInfo {
-                                            self.title = !pageInfo.dispTitle.isEmpty ? pageInfo.dispTitle : "タイトルなし"
-                                        }
-                                    }
-                                }
                         }
                         Picker(selection: $categorySelection,
                                label: Text("カテゴリ")) {
@@ -72,7 +65,13 @@ struct FavDetailView: View {
                                           secondaryButton: .destructive(Text("再読み込み")) {
                                             
                                             // reload
-                                            self.pageInfoObserver.get(url: URL(string: self.url)!)
+                                            self.pageInfoObserver.get(url: URL(string: self.url)!, completion: {(pageInfo, error) in
+                                                guard let pageInfo = pageInfo else {
+                                                    self.title = "タイトルなし"
+                                                    return
+                                                }
+                                                self.title = !pageInfo.dispTitle.isEmpty ? pageInfo.dispTitle : "タイトルなし"
+                                            })
                                           })
                                 }
                                 .disabled(pageReloaded)
@@ -81,7 +80,7 @@ struct FavDetailView: View {
                             
                             if self.pageReloaded {
                                 CountDownIndicatorView(lineWidth: 4, font: .body, count: 10, onStopped: {
-                                    self.pageReloaded.toggle()
+                                    self.pageReloaded = false
                                 })
                                 .background(Color("Main"))
                             }
@@ -182,7 +181,6 @@ struct FavDetailView_Previews: PreviewProvider {
         let categoryStoreMock = CategoryStore(categories: categories)
         
         return NavigationView {
-            //            FavDetailView(id: "a", favStore: favStoreMock, categoryStore: categoryStoreMock, reloadIndicatorVisible: true)
             FavDetailView(id: "a", favStore: favStoreMock, categoryStore: categoryStoreMock )
                 .environmentObject(TimerHolder())
         }

@@ -8,40 +8,25 @@
 import SwiftUI
 
 struct FavCardList: View {
-    var categoryId: String?
-    @State private var favSelection = 0
-    @Binding var selectedFav: Fav
-    @Binding var isLongTapped: Bool
-    @ObservedObject var favStore = FavStore.shared
-    @Binding var isWebViewActive: Bool
+    var contents: [LinkContent]
+    var createActionSheet: ((LinkContent) -> ActionSheet)?
+    var onTapGesture: (LinkContent) -> Void = {_ in }
     @Binding var scrollViewProxy: ScrollViewProxy?
     
     var body: some View {
         ScrollViewReader { proxy in
             VStack(spacing: 0) {
-                let favs = self.getFavs(categoryId: self.categoryId, favs: self.favStore.favs.map { $0 })
-                
-                if favs.count > 0 {
+                if self.contents.count > 0 {
                     GeometryReader { geometry in
                         SwiftUI.List {
-                            ForEach(favs.indices, id: \.self) { index in
+                            ForEach(self.contents.indices, id: \.self) { index in
                                 HStack {
                                     Spacer()
-                                    LinkCardView(url: favs[index].url,
-                                                 title: favs[index].dispTitle,
-                                                 imageUrl: favs[index].imageUrl,
-                                                 width: geometry.size.width * 0.86)
+                                    LinkCardView(content: self.contents[index],
+                                                 width: geometry.size.width * 0.86,
+                                                 createActionSheet: self.createActionSheet,
+                                                 onTapGesture: self.onTapGesture)
                                         .padding(.vertical, UIDevice.current.userInterfaceIdiom != .pad ? 6 : 16)
-                                        .onTapGesture {
-                                            self.favSelection = index
-                                            self.selectedFav = favs[index]
-                                            self.isWebViewActive.toggle()
-                                        }
-                                        .onLongPressGesture {
-                                            self.favSelection = index
-                                            self.selectedFav = favs[index]
-                                            self.isLongTapped = true
-                                        }
                                     Spacer()
                                 }
                                 .id(index)
@@ -57,27 +42,16 @@ struct FavCardList: View {
             }
         }
     }
-    
-    func getFavs(categoryId: String?, favs: [Fav]) -> [Fav] {
-        guard let category = categoryId else {
-            return favs
-        }
-        
-        return favs.filter({ $0.category == category })
-    }
 }
-
 
 struct FavCardList_Previews: PreviewProvider {
     static var previews: some View {
-        let favs = [
-            Fav(id: "a", url: "https://apple.com", order: 0, category: "category1", dispTitle: "title1", imageUrl: ""),
-            Fav(id: "b", url: "https://apple.com", order: 1, category: "category1", dispTitle: "title2", imageUrl: ""),
-            Fav(id: "c", url: "https://apple.com", order: 2, category: "category1", dispTitle: "title3", imageUrl: "")
+        let contents = [
+            LinkContent(id: "a", url: "https://apple.com", title: "title1", imageUrl: ""),
+            LinkContent(id: "b", url: "https://apple.com", title: "title2", imageUrl: ""),
+            LinkContent(id: "c", url: "https://apple.com", title: "title3", imageUrl: "")
         ]
-        let favStoreMock = FavStore(favs: favs)
-        
-        FavCardList(categoryId: favs.first!.category, selectedFav: .constant(favs[0]), isLongTapped: .constant(false), favStore: favStoreMock, isWebViewActive: .constant(false), scrollViewProxy: .constant(nil))
-        
+
+        FavCardList(contents: contents, scrollViewProxy: .constant(nil))
     }
 }
