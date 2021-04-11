@@ -17,12 +17,14 @@ class ViewState: Object, Identifiable {
     
     override init() {}
     
-    convenience init(category: String = "",
+    convenience init(id: Int = 0,
+                     category: String = "",
                      displayMode: String = "",
                      createdAt: String = "",
                      updatedAt: String = "") {
         self.init()
         
+        self.id = id
         self.category = category
         self.displayMode = displayMode
         self.createdAt = createdAt
@@ -31,5 +33,9 @@ class ViewState: Object, Identifiable {
     
     override static func primaryKey() -> String? {
         return "id"
+    }
+    
+    func copy() -> ViewState {
+        return ViewState(id: self.id, category: self.category, displayMode: self.displayMode, createdAt: self.createdAt, updatedAt: self.updatedAt)
     }
 }

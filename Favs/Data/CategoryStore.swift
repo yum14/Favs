@@ -7,6 +7,7 @@
 
 import Foundation
 import RealmSwift
+import UIKit
 
 final class CategoryStore: ObservableObject {
     static let shared = CategoryStore()
@@ -14,10 +15,8 @@ final class CategoryStore: ObservableObject {
     private var notificationTokens: [NotificationToken] = []
     private var realmObject: FavCategories
     
-    // breakして po Realm.Configuration.defaultConfiguration.fileURL! でファイルの場所を確認。
-    // 該当のフォルダのファイルをすべて削除。 rm -rf *
     private init() {
-        let realm = try! Realm()
+        let realm = RealmHelper.createRealm()
         var categories = realm.object(ofType: FavCategories.self, forPrimaryKey: 0)
         if categories == nil {
             categories = try! realm.write{ realm.create(FavCategories.self, value: FavCategories())}
@@ -81,28 +80,28 @@ final class CategoryStore: ObservableObject {
     }
     
     func add(_ newCategory: FavCategory) {
-        let realm = try! Realm()
+        let realm = RealmHelper.createRealm()
         try! realm.write {
             self.realmObject.categories.append(newCategory)
         }
     }
     
     func delete(atOffsets: IndexSet) {
-        let realm = try! Realm()
+        let realm = RealmHelper.createRealm()
         try! realm.write {
             self.realmObject.categories.remove(atOffsets: atOffsets)
         }
     }
     
     func deleteAll() {
-        let realm = try! Realm()
+        let realm = RealmHelper.createRealm()
         try! realm.write {
             self.realmObject.categories.removeAll()
         }
     }
     
     func update(_ category: FavCategory) {
-        let realm = try! Realm()
+        let realm = RealmHelper.createRealm()
         guard let item = self.realmObject.categories.first(where: { $0.id == category.id }) else {
             return
         }
@@ -124,7 +123,7 @@ final class CategoryStore: ObservableObject {
     }
     
     func move(fromOffsets: IndexSet, toOffset: Int) {
-        let realm = try! Realm()
+        let realm = RealmHelper.createRealm()
         try! realm.write {
             self.realmObject.categories.move(fromOffsets: fromOffsets, toOffset: toOffset)
         }

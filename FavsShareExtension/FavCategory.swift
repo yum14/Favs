@@ -1,8 +1,8 @@
 //
-//  Category.swift
-//  Favs
+//  FavCategory.swift
+//  FavsShareExtension
 //
-//  Created by yum on 2020/10/18.
+//  Created by yum on 2021/04/06.
 //
 
 import Foundation
@@ -39,9 +39,5 @@ class FavCategory: Object, Identifiable {
     
     override static func primaryKey() -> String? {
         return "id"
-    }
-    
-    func copy() -> FavCategory {
-        return FavCategory(id: self.id, name: self.name, displayName: self.displayName, isInitial: self.isInitial, order: self.order, createdAt: self.createdAt, updatedAt: self.updatedAt)
     }
 }
