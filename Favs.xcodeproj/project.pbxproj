@@ -11,9 +11,15 @@
 		75040F7126100BB10097BCB7 /* IndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75040F7026100BB10097BCB7 /* IndicatorView.swift */; };
 		7523827C2539DD170033F4D9 /* LinkCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7523827B2539DD170033F4D9 /* LinkCardView.swift */; };
 		7523828D253AB5F60033F4D9 /* WebViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7523828C253AB5F60033F4D9 /* WebViewWrapper.swift */; };
+		75248C5A261DFD6C009EDFFA /* OldCategoryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75248C59261DFD6C009EDFFA /* OldCategoryStore.swift */; };
+		75248C60261F11A1009EDFFA /* LastLaunched.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75248C5F261F11A1009EDFFA /* LastLaunched.swift */; };
+		75248C66261F142E009EDFFA /* LastLaunchedStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75248C65261F142E009EDFFA /* LastLaunchedStore.swift */; };
 		752B4C192552E0990061CDA5 /* WebPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752B4C182552E0990061CDA5 /* WebPageModel.swift */; };
 		752B4C1D2552E0E50061CDA5 /* PageInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752B4C1C2552E0E50061CDA5 /* PageInfo.swift */; };
 		752B4C28255429D90061CDA5 /* NewFavView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752B4C27255429D90061CDA5 /* NewFavView.swift */; };
+		752CFB17261F317100D025C0 /* OldFavStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752CFB16261F317100D025C0 /* OldFavStore.swift */; };
+		752CFB1B261F335C00D025C0 /* OldViewStateStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752CFB1A261F335C00D025C0 /* OldViewStateStore.swift */; };
+		752CFB1F261F377800D025C0 /* MigrationToGroupDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752CFB1E261F377800D025C0 /* MigrationToGroupDatabase.swift */; };
 		752FAF462539D2E700250E3D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752FAF452539D2E700250E3D /* HomeView.swift */; };
 		752FAF4A2539D42100250E3D /* FavCardList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752FAF492539D42100250E3D /* FavCardList.swift */; };
 		752FAF4F2539D4E500250E3D /* Fav.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752FAF4E2539D4E500250E3D /* Fav.swift */; };
@@ -21,6 +27,8 @@
 		753468B2254D29B400D67C88 /* FavCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753468B1254D29B400D67C88 /* FavCategories.swift */; };
 		753468B5254D2ABF00D67C88 /* CategoryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753468B4254D2ABF00D67C88 /* CategoryStore.swift */; };
 		753CD184258F8107009CB072 /* UIColorHex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753CD183258F8107009CB072 /* UIColorHex.swift */; };
+		754F362E2620833300B10BF5 /* RealmHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754F362D2620833300B10BF5 /* RealmHelper.swift */; };
+		754F363526208C0200B10BF5 /* UpgradeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754F363426208C0200B10BF5 /* UpgradeManager.swift */; };
 		75770353254EF9D60019E59A /* Favs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75770352254EF9D60019E59A /* Favs.swift */; };
 		75770356254EFA360019E59A /* FavStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75770355254EFA360019E59A /* FavStore.swift */; };
 		757721422562DB64006D12B7 /* FavDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757721412562DB64006D12B7 /* FavDetailView.swift */; };
@@ -47,6 +55,9 @@
 		75C2BE80253878C0003911E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75C2BE7F253878C0003911E4 /* Assets.xcassets */; };
 		75C2BE83253878C0003911E4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75C2BE82253878C0003911E4 /* Preview Assets.xcassets */; };
 		75D9EF1A259C3F350076AC16 /* CategoryListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D9EF19259C3F350076AC16 /* CategoryListItem.swift */; };
+		75DA37E8261C918A00C13B7D /* FavCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DA37E7261C918A00C13B7D /* FavCategory.swift */; };
+		75DA37EC261C91B100C13B7D /* FavCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DA37EB261C91B100C13B7D /* FavCategories.swift */; };
+		75DA37F8261C97C100C13B7D /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DA37F7261C97C100C13B7D /* ListViewController.swift */; };
 		75E4CDA825FF9AF300DDF691 /* EnvironmentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E4CDA525FF9AF300DDF691 /* EnvironmentData.swift */; };
 		75E4CDA925FF9AF300DDF691 /* EnvironmentStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E4CDA625FF9AF300DDF691 /* EnvironmentStore.swift */; };
 		75E4CDAA25FF9AF300DDF691 /* YoutubeVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E4CDA725FF9AF300DDF691 /* YoutubeVideo.swift */; };
@@ -60,6 +71,7 @@
 		75FF4E31253BFAA5005BCE19 /* FavCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF4E30253BFAA5005BCE19 /* FavCategory.swift */; };
 		75FF4E38253C33D7005BCE19 /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF4E37253C33D7005BCE19 /* ShareSheet.swift */; };
 		75FF4E41253C655F005BCE19 /* CategoryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF4E40253C655F005BCE19 /* CategoryDetailView.swift */; };
+		BA0A07AFD89BABAF617D6A4E /* Pods_FavsShareExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4C034422007ED25B1ADB926 /* Pods_FavsShareExtension.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,9 +103,15 @@
 		75040F7026100BB10097BCB7 /* IndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorView.swift; sourceTree = "<group>"; };
 		7523827B2539DD170033F4D9 /* LinkCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkCardView.swift; sourceTree = "<group>"; };
 		7523828C253AB5F60033F4D9 /* WebViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewWrapper.swift; sourceTree = "<group>"; };
+		75248C59261DFD6C009EDFFA /* OldCategoryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldCategoryStore.swift; sourceTree = "<group>"; };
+		75248C5F261F11A1009EDFFA /* LastLaunched.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastLaunched.swift; sourceTree = "<group>"; };
+		75248C65261F142E009EDFFA /* LastLaunchedStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastLaunchedStore.swift; sourceTree = "<group>"; };
 		752B4C182552E0990061CDA5 /* WebPageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebPageModel.swift; sourceTree = "<group>"; };
 		752B4C1C2552E0E50061CDA5 /* PageInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageInfo.swift; sourceTree = "<group>"; };
 		752B4C27255429D90061CDA5 /* NewFavView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFavView.swift; sourceTree = "<group>"; };
+		752CFB16261F317100D025C0 /* OldFavStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldFavStore.swift; sourceTree = "<group>"; };
+		752CFB1A261F335C00D025C0 /* OldViewStateStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldViewStateStore.swift; sourceTree = "<group>"; };
+		752CFB1E261F377800D025C0 /* MigrationToGroupDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationToGroupDatabase.swift; sourceTree = "<group>"; };
 		752FAF452539D2E700250E3D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		752FAF492539D42100250E3D /* FavCardList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavCardList.swift; sourceTree = "<group>"; };
 		752FAF4E2539D4E500250E3D /* Fav.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fav.swift; sourceTree = "<group>"; };
@@ -101,6 +119,8 @@
 		753468B1254D29B400D67C88 /* FavCategories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavCategories.swift; sourceTree = "<group>"; };
 		753468B4254D2ABF00D67C88 /* CategoryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryStore.swift; sourceTree = "<group>"; };
 		753CD183258F8107009CB072 /* UIColorHex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorHex.swift; sourceTree = "<group>"; };
+		754F362D2620833300B10BF5 /* RealmHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmHelper.swift; sourceTree = "<group>"; };
+		754F363426208C0200B10BF5 /* UpgradeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpgradeManager.swift; sourceTree = "<group>"; };
 		75770352254EF9D60019E59A /* Favs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favs.swift; sourceTree = "<group>"; };
 		75770355254EFA360019E59A /* FavStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavStore.swift; sourceTree = "<group>"; };
 		757721412562DB64006D12B7 /* FavDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavDetailView.swift; sourceTree = "<group>"; };
@@ -131,6 +151,9 @@
 		75C2BE82253878C0003911E4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		75C2BE84253878C0003911E4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		75D9EF19259C3F350076AC16 /* CategoryListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListItem.swift; sourceTree = "<group>"; };
+		75DA37E7261C918A00C13B7D /* FavCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavCategory.swift; sourceTree = "<group>"; };
+		75DA37EB261C91B100C13B7D /* FavCategories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavCategories.swift; sourceTree = "<group>"; };
+		75DA37F7261C97C100C13B7D /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		75E4CDA525FF9AF300DDF691 /* EnvironmentData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnvironmentData.swift; sourceTree = "<group>"; };
 		75E4CDA625FF9AF300DDF691 /* EnvironmentStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnvironmentStore.swift; sourceTree = "<group>"; };
 		75E4CDA725FF9AF300DDF691 /* YoutubeVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoutubeVideo.swift; sourceTree = "<group>"; };
@@ -144,8 +167,11 @@
 		75FF4E30253BFAA5005BCE19 /* FavCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavCategory.swift; sourceTree = "<group>"; };
 		75FF4E37253C33D7005BCE19 /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
 		75FF4E40253C655F005BCE19 /* CategoryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDetailView.swift; sourceTree = "<group>"; };
+		89521F63A9472648A691B741 /* Pods-FavsShareExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FavsShareExtension.debug.xcconfig"; path = "Target Support Files/Pods-FavsShareExtension/Pods-FavsShareExtension.debug.xcconfig"; sourceTree = "<group>"; };
+		A4C034422007ED25B1ADB926 /* Pods_FavsShareExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FavsShareExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD46CF09AFCAF754872943E8 /* Pods-Favs.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Favs.debug.xcconfig"; path = "Target Support Files/Pods-Favs/Pods-Favs.debug.xcconfig"; sourceTree = "<group>"; };
 		F10103C3EF98E7B7740A1656 /* Pods-Favs.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Favs.release.xcconfig"; path = "Target Support Files/Pods-Favs/Pods-Favs.release.xcconfig"; sourceTree = "<group>"; };
+		F1A6D1FCAF75EF93D971AD39 /* Pods-FavsShareExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FavsShareExtension.release.xcconfig"; path = "Target Support Files/Pods-FavsShareExtension/Pods-FavsShareExtension.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +179,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA0A07AFD89BABAF617D6A4E /* Pods_FavsShareExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -173,8 +200,19 @@
 			children = (
 				CD46CF09AFCAF754872943E8 /* Pods-Favs.debug.xcconfig */,
 				F10103C3EF98E7B7740A1656 /* Pods-Favs.release.xcconfig */,
+				89521F63A9472648A691B741 /* Pods-FavsShareExtension.debug.xcconfig */,
+				F1A6D1FCAF75EF93D971AD39 /* Pods-FavsShareExtension.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		75248C58261DFD57009EDFFA /* Upgrade */ = {
+			isa = PBXGroup;
+			children = (
+				754F363326208BAD00B10BF5 /* 1.3.0 */,
+				754F363426208C0200B10BF5 /* UpgradeManager.swift */,
+			);
+			path = Upgrade;
 			sourceTree = "<group>";
 		};
 		752FAF482539D3A000250E3D /* Views */ = {
@@ -219,8 +257,21 @@
 				7587D6E425B3F68E00694763 /* ViewState.swift */,
 				7587D6E825B3F85B00694763 /* ViewStateStore.swift */,
 				75B71C762619DACE00DDB120 /* LinkContent.swift */,
+				75248C5F261F11A1009EDFFA /* LastLaunched.swift */,
+				75248C65261F142E009EDFFA /* LastLaunchedStore.swift */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		754F363326208BAD00B10BF5 /* 1.3.0 */ = {
+			isa = PBXGroup;
+			children = (
+				75248C59261DFD6C009EDFFA /* OldCategoryStore.swift */,
+				752CFB16261F317100D025C0 /* OldFavStore.swift */,
+				752CFB1A261F335C00D025C0 /* OldViewStateStore.swift */,
+				752CFB1E261F377800D025C0 /* MigrationToGroupDatabase.swift */,
+			);
+			path = 1.3.0;
 			sourceTree = "<group>";
 		};
 		759DD2B9253F3DBC009F5400 /* Models */ = {
@@ -246,6 +297,9 @@
 				75BB0AC825878E49005391BF /* MainInterface.storyboard */,
 				75BB0ACB25878E49005391BF /* Info.plist */,
 				75BB0AD92587A094005391BF /* SharedFav.swift */,
+				75DA37E7261C918A00C13B7D /* FavCategory.swift */,
+				75DA37EB261C91B100C13B7D /* FavCategories.swift */,
+				75DA37F7261C97C100C13B7D /* ListViewController.swift */,
 			);
 			path = FavsShareExtension;
 			sourceTree = "<group>";
@@ -255,6 +309,7 @@
 			children = (
 				75BE2D48255697CC00482E8F /* URLHelper.swift */,
 				753CD183258F8107009CB072 /* UIColorHex.swift */,
+				754F362D2620833300B10BF5 /* RealmHelper.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -282,6 +337,7 @@
 		75C2BE7A253878BF003911E4 /* Favs */ = {
 			isa = PBXGroup;
 			children = (
+				75248C58261DFD57009EDFFA /* Upgrade */,
 				75BB0AD625879115005391BF /* Favs.entitlements */,
 				75BE2D47255697A700482E8F /* Utilities */,
 				759DD2B9253F3DBC009F5400 /* Models */,
@@ -309,6 +365,7 @@
 			isa = PBXGroup;
 			children = (
 				146A9E649A1B6A4744575B4D /* Pods_Favs.framework */,
+				A4C034422007ED25B1ADB926 /* Pods_FavsShareExtension.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -320,6 +377,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 75BB0ACF25878E49005391BF /* Build configuration list for PBXNativeTarget "FavsShareExtension" */;
 			buildPhases = (
+				4CB8F9506665BCB25768A976 /* [CP] Check Pods Manifest.lock */,
 				75BB0AC025878E49005391BF /* Sources */,
 				75BB0AC125878E49005391BF /* Frameworks */,
 				75BB0AC225878E49005391BF /* Resources */,
@@ -418,6 +476,28 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		4CB8F9506665BCB25768A976 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FavsShareExtension-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		D8285BCD34953F135C90783C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -465,7 +545,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				75BB0AC725878E49005391BF /* ShareViewController.swift in Sources */,
+				75DA37EC261C91B100C13B7D /* FavCategories.swift in Sources */,
 				75BB0ADA2587A094005391BF /* SharedFav.swift in Sources */,
+				75DA37F8261C97C100C13B7D /* ListViewController.swift in Sources */,
+				75DA37E8261C918A00C13B7D /* FavCategory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -475,6 +558,7 @@
 			files = (
 				75E4CDBD25FF9B4300DDF691 /* WebAccessible.swift in Sources */,
 				75BB0AEA2588D7FC005391BF /* SharedFav.swift in Sources */,
+				75248C60261F11A1009EDFFA /* LastLaunched.swift in Sources */,
 				752B4C28255429D90061CDA5 /* NewFavView.swift in Sources */,
 				752FAF462539D2E700250E3D /* HomeView.swift in Sources */,
 				753CD184258F8107009CB072 /* UIColorHex.swift in Sources */,
@@ -492,8 +576,11 @@
 				7587D6E525B3F68E00694763 /* ViewState.swift in Sources */,
 				7533CDA12540705000B49A60 /* FAB.swift in Sources */,
 				753468B5254D2ABF00D67C88 /* CategoryStore.swift in Sources */,
+				752CFB1F261F377800D025C0 /* MigrationToGroupDatabase.swift in Sources */,
 				75FF4E38253C33D7005BCE19 /* ShareSheet.swift in Sources */,
+				752CFB17261F317100D025C0 /* OldFavStore.swift in Sources */,
 				75E4CDA925FF9AF300DDF691 /* EnvironmentStore.swift in Sources */,
+				754F362E2620833300B10BF5 /* RealmHelper.swift in Sources */,
 				75E4CDC025FF9B4300DDF691 /* YoutubeVideoDataModel.swift in Sources */,
 				75FE571326101CF200B70CF6 /* CountDownIndicatorView.swift in Sources */,
 				7523828D253AB5F60033F4D9 /* WebViewWrapper.swift in Sources */,
@@ -503,18 +590,22 @@
 				75E4CDBE25FF9B4300DDF691 /* WebAccessSelector.swift in Sources */,
 				757721422562DB64006D12B7 /* FavDetailView.swift in Sources */,
 				75E4CDBF25FF9B4300DDF691 /* PageInfoObserver.swift in Sources */,
+				75248C5A261DFD6C009EDFFA /* OldCategoryStore.swift in Sources */,
 				75BB0AE22588D6E3005391BF /* SharedFavObserver.swift in Sources */,
 				759DD2BB253F3DCD009F5400 /* RemoteImageModel.swift in Sources */,
 				75770353254EF9D60019E59A /* Favs.swift in Sources */,
+				75248C66261F142E009EDFFA /* LastLaunchedStore.swift in Sources */,
 				75B71C772619DACE00DDB120 /* LinkContent.swift in Sources */,
 				759DD2C1253F3E8C009F5400 /* ImageUrlView.swift in Sources */,
 				75B583F7259995D000C4E336 /* CategoryView.swift in Sources */,
 				758C7C8D25988BA000D94D50 /* FavList.swift in Sources */,
+				754F363526208C0200B10BF5 /* UpgradeManager.swift in Sources */,
 				75BE2D49255697CC00482E8F /* URLHelper.swift in Sources */,
 				75770356254EFA360019E59A /* FavStore.swift in Sources */,
 				75D9EF1A259C3F350076AC16 /* CategoryListItem.swift in Sources */,
 				75040F7126100BB10097BCB7 /* IndicatorView.swift in Sources */,
 				75FE573326103F2400B70CF6 /* TimerHolder.swift in Sources */,
+				752CFB1B261F335C00D025C0 /* OldViewStateStore.swift in Sources */,
 				759D724225977121007D7602 /* LinkRowView.swift in Sources */,
 				75FF4E41253C655F005BCE19 /* CategoryDetailView.swift in Sources */,
 			);
@@ -544,10 +635,11 @@
 /* Begin XCBuildConfiguration section */
 		75BB0AD025878E49005391BF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 89521F63A9472648A691B741 /* Pods-FavsShareExtension.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = FavsShareExtension/FavsShareExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = TB8F2PW523;
 				INFOPLIST_FILE = FavsShareExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -556,7 +648,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.inakase.Favs.FavsShareExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -567,10 +659,11 @@
 		};
 		75BB0AD125878E49005391BF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F1A6D1FCAF75EF93D971AD39 /* Pods-FavsShareExtension.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = FavsShareExtension/FavsShareExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = TB8F2PW523;
 				INFOPLIST_FILE = FavsShareExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -579,7 +672,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.inakase.Favs.FavsShareExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -713,7 +806,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Favs/Favs.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Favs/Preview Content\"";
 				DEVELOPMENT_TEAM = TB8F2PW523;
 				ENABLE_PREVIEWS = YES;
@@ -723,7 +816,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.inakase.Favs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -740,7 +833,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Favs/Favs.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Favs/Preview Content\"";
 				DEVELOPMENT_TEAM = TB8F2PW523;
 				ENABLE_PREVIEWS = YES;
@@ -750,7 +843,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.inakase.Favs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

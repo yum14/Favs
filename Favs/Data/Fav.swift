@@ -86,4 +86,8 @@ class Fav: Object, Identifiable {
     override static func primaryKey() -> String? {
         return "id"
     }
+    
+    func copy() -> Fav {
+        return Fav(id: self.id, url: self.url, order: self.order, category: self.category, comment: self.comment, dispTitle: self.dispTitle, dispDescription: self.dispDescription, imageUrl: self.imageUrl, titleOnHeader: self.titleOnHeader, ogTitle: self.ogTitle, ogDescription: self.ogDescription, ogType: self.ogType, ogUrl: self.ogUrl, ogImage: self.ogImage, fbAppId: self.fbAppId, twitterCard: self.twitterCard, twitterSite: self.twitterSite, twitterCreator: self.twitterCreator, descriptionOnHeader: self.descriptionOnHeader, thumbnail: self.thumbnail, createdAt: self.createdAt, updatedAt: self.updatedAt)
+    }
 }

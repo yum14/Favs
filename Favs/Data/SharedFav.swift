@@ -10,4 +10,5 @@ import Foundation
 struct SharedFav: Equatable, Codable {
     let url: URL
     let title: String
+    let categoryId: String?
 }

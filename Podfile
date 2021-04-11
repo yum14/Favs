@@ -10,3 +10,8 @@ target 'Favs' do
   pod 'RealmSwift'
   pod 'Kanna'
 end
+
+target 'FavsShareExtension' do
+  use_frameworks!
+  pod 'RealmSwift'
+end 

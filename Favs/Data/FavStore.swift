@@ -13,11 +13,9 @@ final class FavStore: ObservableObject {
     @Published var favs: List<Fav>
     private var notificationTokens: [NotificationToken] = []
     private var realmObject: Favs
-    
-    // breakして po Realm.Configuration.defaultConfiguration.fileURL! でファイルの場所を確認。
-    // 該当のフォルダのファイルをすべて削除。 rm -rf *
+
     private init() {
-        let realm = try! Realm()
+        let realm = RealmHelper.createRealm()
         var favs = realm.object(ofType: Favs.self, forPrimaryKey: 0)
         if favs == nil {
             favs = try! realm.write{ realm.create(Favs.self, value: Favs())}
@@ -105,21 +103,25 @@ final class FavStore: ObservableObject {
                          createdAt: df.string(from: dt),
                          updatedAt: "")
         
-        let realm = try! Realm()
+        add(newFav)
+    }
+    
+    func add(_ newFav: Fav) {
+        let realm = RealmHelper.createRealm()
         try! realm.write {
             self.realmObject.favs.append(newFav)
         }
     }
     
     func delete(atOffsets: IndexSet) {
-        let realm = try! Realm()
+        let realm = RealmHelper.createRealm()
         try! realm.write {
             self.realmObject.favs.remove(atOffsets: atOffsets)
         }
     }
     
     func deleteAll() {
-        let realm = try! Realm()
+        let realm = RealmHelper.createRealm()
         try! realm.write {
             self.realmObject.favs.removeAll()
         }
@@ -156,7 +158,7 @@ final class FavStore: ObservableObject {
         df.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let now = df.string(from: dt)
         
-        let realm = try! Realm()
+        let realm = RealmHelper.createRealm()
         try! realm.write {
             if let url = url { item.url = url }
             if let order = order { item.order = order }
@@ -181,7 +183,7 @@ final class FavStore: ObservableObject {
     }
     
     func move(fromOffsets: IndexSet, toOffset: Int) {
-        let realm = try! Realm()
+        let realm = RealmHelper.createRealm()
         try! realm.write {
             self.realmObject.favs.move(fromOffsets: fromOffsets, toOffset: toOffset)
         }

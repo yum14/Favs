@@ -12,12 +12,8 @@ final class ViewStateStore: NSObject, ObservableObject {
     static let shared = ViewStateStore()
     private var viewState: ViewState
 
-    // breakして po Realm.Configuration.defaultConfiguration.fileURL! でファイルの場所を確認。
-    // /Users/yumurata/Library/Developer/CoreSimulator/Devices/434C1063-4104-4B45-9912-B02C2BAF0622/data/Containers/Data/Application/4135D260-4190-4E6F-AFDE-5B551525D406/Documents/
-    // 該当のフォルダのファイルをすべて削除。 rm -rf *
     private override init() {
-        
-        let realm = try! Realm()
+        let realm = RealmHelper.createRealm()
         var viewState = realm.object(ofType: ViewState.self, forPrimaryKey: 0)
         if viewState == nil {
             viewState = try! realm.write{ realm.create(ViewState.self, value: ViewState())}
@@ -31,7 +27,7 @@ final class ViewStateStore: NSObject, ObservableObject {
     }
 
     func update(_ viewState: ViewState) {
-        let realm = try! Realm()
+        let realm = RealmHelper.createRealm()
         
         try! realm.write {
             let dt = Date()
