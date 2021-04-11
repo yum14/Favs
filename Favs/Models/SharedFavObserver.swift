@@ -37,10 +37,13 @@ class SharedFavObserver: NSObject {
             for item in sharedFavs {
                 let completion = { (pageInfo: PageInfo?, error: Error?) in
                     if let pageInfo = pageInfo {
+                        
+                        let dispTitle = YoutubeVideoDataModel.isTarget(url: item.url) && item.url.absoluteString == item.title ? pageInfo.dispTitle : item.title
+                        
                         self.favStore.add(url: item.url.absoluteString,
                                           category: item.categoryId ?? self.categoryStore.categoryList.first(where: {$0.isInitial})!.id,
                                           comment: "",
-                                          dispTitle: YoutubeVideoDataModel.isTarget(url: item.url) && item.url.absoluteString == item.title ? pageInfo.dispTitle : item.title,
+                                          dispTitle: dispTitle.isEmpty ? "タイトルなし" : dispTitle,
                                           dispDescription: pageInfo.dispDescription,
                                           imageUrl: pageInfo.imageUrl,
                                           titleOnHeader: pageInfo.titleOnHeader,
