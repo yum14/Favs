@@ -40,6 +40,14 @@ struct HomeView: View {
     var body: some View {
         ZStack {
             VStack(spacing: 0) {
+                
+                // これがないと↓のタップ時の画面遷移直後にこの画面に戻ってきてしまう・・
+                // CategoryViewでは発生せず。どこからかのバージョンでこうなってしまったと思われる。
+                // 原因不明。とりあえず暫定対応。
+                NavigationLink("") {
+                    EmptyView()
+                }
+                
                 // Tap時の画面遷移
                 NavigationLink(
                     destination: Group {
@@ -115,13 +123,10 @@ struct HomeView: View {
             leading: Button(action: {
                 self.presentationMode.wrappedValue.dismiss()
             }) {
-//                if UIDevice.current.userInterfaceIdiom != .pad {
                 Image(systemName: "chevron.backward")
                     .foregroundColor(Color("NavigationBarItem"))
                     .font(.title3)
-                    .padding(.vertical)
-                //                        .padding(.trailing)
-                //                }
+                    .padding(.trailing)
             },
             center: Button(action: {
                 withAnimation {
@@ -129,14 +134,12 @@ struct HomeView: View {
                 }
             }) {
                 // iPadの場合に1つ前の表示したテキストの長さからWidthが拡張してくれない（バグ？）
-                // よって自分でwidthを設定しておく
-                GeometryReader { geometry in
-                    Text(self.getNavigationBarTitle(categories: self.categoryStore.categoryList, categoryId: self.categoryId))
-                        .foregroundColor(Color("NavigationBarItem"))
-                        .font(.body, weight: .bold)
-                        .frame(width: geometry.size.width * 0.9)
-                        .padding()
-                }
+                // よって明示的にwidthを設定しておく
+                Text(self.getNavigationBarTitle(categories: self.categoryStore.categoryList, categoryId: self.categoryId))
+                    .foregroundColor(Color("NavigationBarItem"))
+                    .font(.body, weight: .bold)
+                    .lineLimit(1)
+                    .frame(width: UIScreen.main.bounds.size.width * 0.55)
             },
             trailing:
                 HStack {

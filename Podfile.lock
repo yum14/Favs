@@ -1,11 +1,11 @@
 PODS:
   - Kanna (5.2.4)
   - Parchment (3.0.1)
-  - Realm (10.5.1):
-    - Realm/Headers (= 10.5.1)
-  - Realm/Headers (10.5.1)
-  - RealmSwift (10.5.1):
-    - Realm (= 10.5.1)
+  - Realm (10.7.5):
+    - Realm/Headers (= 10.7.5)
+  - Realm/Headers (10.7.5)
+  - RealmSwift (10.7.5):
+    - Realm (= 10.7.5)
 
 DEPENDENCIES:
   - Kanna
@@ -22,8 +22,8 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Kanna: b9d00d7c11428308c7f95e1f1f84b8205f567a8f
   Parchment: 466a1cfb6151780db8acb4bbedc2d9c6bfa1e2ff
-  Realm: 77fcb4e0b9f2963ea06f584749a0d7dc9cab95e1
-  RealmSwift: 6abe6aa6cd8b70cc1a87afcb9232cabea74ff1ac
+  Realm: 06f5c67f87cb8c5f27b122218ce22e9a77314517
+  RealmSwift: b46535b52e69b9ed33912f0fcb3182ab0a5743ee
 
 PODFILE CHECKSUM: 0a83b34c0d9acfa5be678edc252bb023eb69e6bd
 
