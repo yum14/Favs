@@ -70,6 +70,7 @@ h3 {
   display: block;
   margin: 0 auto 56px;
   width: 54%;
+  max-width: 800px;
 }
 
 .screen-and-description {
