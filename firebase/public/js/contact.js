@@ -1,5 +1,12 @@
 'use strict';
 
+// gmailログイン情報やメールアドレスはconfignにて設定
+// firebase functions:config:get
+
+// パスワードはアプリパスワードを作成した上で設定する必要がある
+// https://support.google.com/mail/answer/185833?hl=en
+// ※2022/5/30以降は今までの「安全性の低いアプリの許可」で認証を通すことはできなくなった
+
 document.addEventListener('DOMContentLoaded', () => {
 
   const displayStatus = (status) => {
@@ -51,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const position = submitTag.getBoundingClientRect();
     window.scrollTo(0, position.top);
 
-    fetch('https://us-central1-favs-22518.cloudfunctions.net/sendMail', {
+    fetch('https://asia-northeast1-favs-67614.cloudfunctions.net/sendMail', {
       method: 'post',
       headers: {
         'Content-Type': 'application/json'
