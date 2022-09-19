@@ -37,7 +37,6 @@
 		7587D6E925B3F85B00694763 /* ViewStateStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7587D6E825B3F85B00694763 /* ViewStateStore.swift */; };
 		758C7C8D25988BA000D94D50 /* FavList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758C7C8C25988BA000D94D50 /* FavList.swift */; };
 		759D724225977121007D7602 /* LinkRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 759D724125977121007D7602 /* LinkRowView.swift */; };
-		759DD2B7253F062A009F5400 /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = 759DD2B6253F062A009F5400 /* SwiftUIX */; };
 		759DD2BB253F3DCD009F5400 /* RemoteImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 759DD2BA253F3DCD009F5400 /* RemoteImageModel.swift */; };
 		759DD2C1253F3E8C009F5400 /* ImageUrlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 759DD2C0253F3E8C009F5400 /* ImageUrlView.swift */; };
 		759EC09626024C980020FD36 /* .env in Resources */ = {isa = PBXBuildFile; fileRef = 759EC09526024C980020FD36 /* .env */; };
@@ -71,6 +70,7 @@
 		75FF4E31253BFAA5005BCE19 /* FavCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF4E30253BFAA5005BCE19 /* FavCategory.swift */; };
 		75FF4E38253C33D7005BCE19 /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF4E37253C33D7005BCE19 /* ShareSheet.swift */; };
 		75FF4E41253C655F005BCE19 /* CategoryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF4E40253C655F005BCE19 /* CategoryDetailView.swift */; };
+		AABFD2F128D84B940035B7E5 /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = AABFD2F028D84B940035B7E5 /* SwiftUIX */; };
 		BA0A07AFD89BABAF617D6A4E /* Pods_FavsShareExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4C034422007ED25B1ADB926 /* Pods_FavsShareExtension.framework */; };
 /* End PBXBuildFile section */
 
@@ -188,7 +188,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				27E141CBC42FE73EA4DE0627 /* Pods_Favs.framework in Frameworks */,
-				759DD2B7253F062A009F5400 /* SwiftUIX in Frameworks */,
+				AABFD2F128D84B940035B7E5 /* SwiftUIX in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -409,7 +409,7 @@
 			);
 			name = Favs;
 			packageProductDependencies = (
-				759DD2B6253F062A009F5400 /* SwiftUIX */,
+				AABFD2F028D84B940035B7E5 /* SwiftUIX */,
 			);
 			productName = Favs;
 			productReference = 75C2BE78253878BF003911E4 /* Favs.app */;
@@ -442,7 +442,7 @@
 			);
 			mainGroup = 75C2BE6F253878BF003911E4;
 			packageReferences = (
-				759DD2B5253F062A009F5400 /* XCRemoteSwiftPackageReference "SwiftUIX" */,
+				AABFD2EF28D84B940035B7E5 /* XCRemoteSwiftPackageReference "SwiftUIX" */,
 			);
 			productRefGroup = 75C2BE79253878BF003911E4 /* Products */;
 			projectDirPath = "";
@@ -884,20 +884,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		759DD2B5253F062A009F5400 /* XCRemoteSwiftPackageReference "SwiftUIX" */ = {
+		AABFD2EF28D84B940035B7E5 /* XCRemoteSwiftPackageReference "SwiftUIX" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftUIX/SwiftUIX";
 			requirement = {
-				branch = master;
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.2;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		759DD2B6253F062A009F5400 /* SwiftUIX */ = {
+		AABFD2F028D84B940035B7E5 /* SwiftUIX */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 759DD2B5253F062A009F5400 /* XCRemoteSwiftPackageReference "SwiftUIX" */;
+			package = AABFD2EF28D84B940035B7E5 /* XCRemoteSwiftPackageReference "SwiftUIX" */;
 			productName = SwiftUIX;
 		};
 /* End XCSwiftPackageProductDependency section */
